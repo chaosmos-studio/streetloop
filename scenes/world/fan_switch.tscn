@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A155_fan_wall_switch.glb" id="1_art"]
+[ext_resource type="Script" path="res://scripts/fan_switch.gd" id="2_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_plate"]
+size = Vector3(0.115, 0.185, 0.025)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interaction"]
+size = Vector3(0.3, 0.3, 0.35)
+
+[node name="FanSwitch" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="Art" parent="." instance=ExtResource("1_art")]
+
+[node name="PlateBody" type="StaticBody3D" parent="."]
+
+[node name="Collision" type="CollisionShape3D" parent="PlateBody"]
+position = Vector3(0, 0.1, 0)
+shape = SubResource("BoxShape3D_plate")
+
+[node name="Interaction" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="InteractionVolume" type="CollisionShape3D" parent="Interaction"]
+position = Vector3(0, 0.1, -0.16)
+shape = SubResource("BoxShape3D_interaction")
+
+[node name="IndicatorLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 0.151, -0.03)
+visible = false
+light_color = Color(1, 0.47, 0.14, 1)
+light_energy = 0.07
+omni_range = 0.35

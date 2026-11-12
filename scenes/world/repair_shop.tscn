@@ -1,8 +1,11 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="PackedScene" path="res://assets/models/A006_corner_repair_shop.glb" id="1_shop"]
 [ext_resource type="PackedScene" path="res://scenes/world/mechanic_workbench.tscn" id="2_bench"]
 [ext_resource type="PackedScene" path="res://scenes/world/public_door.tscn" id="3_door"]
+[ext_resource type="PackedScene" path="res://scenes/world/ceiling_fan.tscn" id="4_fan"]
+[ext_resource type="PackedScene" path="res://scenes/world/fan_switch.tscn" id="5_switch"]
+[ext_resource type="Script" path="res://scripts/repair_shop.gd" id="6_script"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(10.05, 0.22, 8.05)
@@ -38,6 +41,7 @@ size = Vector3(10, 3.14, 0.24)
 size = Vector3(0.24, 3.14, 8)
 
 [node name="RepairShop" type="Node3D"]
+script = ExtResource("6_script")
 
 [node name="Art" parent="." instance=ExtResource("1_shop")]
 
@@ -101,6 +105,13 @@ position = Vector3(1.8, 0.16, 2.6)
 [node name="PublicDoor" parent="." instance=ExtResource("3_door")]
 position = Vector3(-3.36, 0, -4.02)
 initially_open = true
+
+[node name="CeilingFan" parent="." instance=ExtResource("4_fan")]
+position = Vector3(0, 3.56, 0)
+
+[node name="FanSwitch" parent="." instance=ExtResource("5_switch")]
+position = Vector3(-1.8, 1.2, -3.72)
+rotation = Vector3(0, 3.14159, 0)
 
 [node name="ServiceBayLight" type="OmniLight3D" parent="."]
 position = Vector3(1.6, 3.15, 0)

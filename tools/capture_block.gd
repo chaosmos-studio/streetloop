@@ -36,6 +36,34 @@ func _capture() -> void:
 	var bench_output: String = "res://art/review/workbench_material_close.png"
 	var bench_result: Error = bench_image.save_png(bench_output)
 	print("Capture: ", bench_output, " ", bench_image.get_width(), "x", bench_image.get_height(), " result=", bench_result)
+	var shop: Node3D = scene.get_node("HarborBlock/Buildings/CornerRepairShop")
+	var fan: WorkshopFan = shop.get_node("CeilingFan")
+	var fan_switch: FanSwitch = shop.get_node("FanSwitch")
+	print("Fan speed before switch: ", fan.get_speed())
+	fan_switch.toggle()
+	for frame in 120:
+		await process_frame
+	print("Fan speed after switch on: ", fan.get_speed())
+	camera.position = Vector3(9.5, 1.75, 1.2)
+	camera.look_at(Vector3(9.5, 3.16, 0))
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var fan_image: Image = root.get_texture().get_image()
+	var fan_output: String = "res://art/review/workshop_fan_on.png"
+	var fan_result: Error = fan_image.save_png(fan_output)
+	print("Capture: ", fan_output, " ", fan_image.get_width(), "x", fan_image.get_height(), " result=", fan_result)
+	camera.position = Vector3(7, 1.42, 1.8)
+	camera.look_at(Vector3(5.78, 1.31, 1.8))
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var switch_image: Image = root.get_texture().get_image()
+	var switch_output: String = "res://art/review/fan_switch_on.png"
+	var switch_result: Error = switch_image.save_png(switch_output)
+	print("Capture: ", switch_output, " ", switch_image.get_width(), "x", switch_image.get_height(), " result=", switch_result)
+	fan_switch.toggle()
+	for frame in 60:
+		await process_frame
+	print("Fan speed during coast-down: ", fan.get_speed())
 	var door: Node3D = scene.get_node("HarborBlock/Buildings/CornerRepairShop/PublicDoor")
 	print("Open doorway ray: ", _door_ray(scene.get_world_3d()))
 	door.call("set_open", false)
@@ -57,6 +85,10 @@ func _capture() -> void:
 		result = interior_result
 	if result == OK:
 		result = bench_result
+	if result == OK:
+		result = fan_result
+	if result == OK:
+		result = switch_result
 	if result == OK:
 		result = door_result
 	quit(result)

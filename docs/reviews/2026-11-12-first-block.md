@@ -22,3 +22,7 @@ The next review must measure the draw-call change, prove doorway and furnishing 
 The hinged A122 door replaced the shop's decorative leaf, and its closed close-up is in `art/review/repair_shop_door_closed.png`.
 An open doorway ray was clear and the same ray hit `LeafBody` after closing, which checks the collider state along the intended entry path.
 The exterior view measured 640 draw calls after the separate door was added.
+The separate ceiling fan and wall switch were imported into the repair shop and connected locally.
+The review capture measured fan speed at 0 before the switch, 6.52 rad/s after 120 rendered frames switched on, and 5.40 rad/s after 60 rendered frames switched off.
+The captures in `art/review/workshop_fan_on.png` and `art/review/fan_switch_on.png` show the imported assets, but the room finishes remain flat and the switch has no player input path yet.
+The latest exterior review frame measured 781 draw calls and 37,278 primitives, and the interior measured 452 draw calls with the fan and switch present.
