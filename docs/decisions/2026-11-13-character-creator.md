@@ -4,7 +4,7 @@
 | --- | --- | --- | --- |
 | Scope | A durable creator inside the current playable neighborhood | The LIFE character will be reused across later districts | The life-stage system needs different bodies |
 | Identity | Several original adult face and body bases | A palette swap alone does not create a distinct person | New identities are sculpted and rigged |
-| Configuration | Identity, skin, hair, facial hair, outfit, and clothing colors only when the corresponding asset exists | Every choice must make a visible change | A new garment or groom is reviewed |
+| Configuration | Identity and material colors first. Add hair style, facial hair, and outfit choices when fitted assets exist | Every choice must make a visible change | A new garment or groom is reviewed |
 | Scene ownership | One controller with a replaceable character visual | Movement and interactions should behave identically for every identity | Body size changes collision or reach |
 | Data | Authored definitions in project resources and one validated selection in `user://` JSON | Designers need editable options and the player needs a safe persistent choice | Save slots join the LIFE game |
 | Preview | A live 3D preview inside a responsive Control overlay | Players need to inspect the face and outfit from different angles | A full creator room becomes useful |

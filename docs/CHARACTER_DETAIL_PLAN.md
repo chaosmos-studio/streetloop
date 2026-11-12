@@ -37,9 +37,10 @@ The next unit is the character's original face and skin surface, followed by the
 - [ ] Fit at least two hair silhouettes and one facial-hair option to each head shape.
 - [ ] Fit clothing shapes and material variants without clipping at walking, crouching, and driving extremes.
 - [ ] Rig every selectable body to the same skeleton and review walk, run, turn, jump, sit, and idle in motion.
-- [ ] Build a rotatable creator preview with clear identity and appearance choices.
-- [ ] Save and reload the choice, then use it for the live player in the harbor route.
+- [x] Build a rotatable creator preview with clear identity and appearance choices.
+- [x] Save and reload the choice, then use it for the live player in the harbor route.
 - [ ] Measure draw calls, triangles, texture memory, and frame cost for each combination.
 
 Do not expose a choice until its art changes visibly in both the preview and the live player.
 Keep the authoring source, exports, camera review, and acceptance notes for every identity.
+The initial creator is a playable character lab. Its models have shared motion clips and visible material choices, but the facial, garment, skin, and gait work above remains open before A001 is accepted.
