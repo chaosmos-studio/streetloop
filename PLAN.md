@@ -14,6 +14,8 @@ Each milestone ends with a playable build and a short review of movement, visual
   Skills: `godot-prompter:assets-pipeline`, `godot-prompter:3d-essentials`.
 - [ ] Complete one explorable shop interior with usable doors, reachable objects, and collision that matches every visible surface.
   Skills: `godot-prompter:scene-organization`, `godot-prompter:physics-system`, `godot-prompter:assets-pipeline`.
+- [ ] Make the repair shop a realistic material and interaction benchmark with authored floor finishes, ceiling detail, a switched fan, a readable service manual, and a usable computer.
+  Skills: `godot-prompter:assets-pipeline`, `godot-prompter:animation-system`, `godot-prompter:input-handling`, `godot-prompter:godot-ui`.
 - [ ] Assemble the first harbor block from asset scenes with independent collisions and interaction points.
   Skills: `godot-prompter:scene-organization`, `godot-prompter:physics-system`, `godot-prompter:3d-essentials`.
 - [ ] Add third-person on-foot movement with stable camera and gamepad input.
@@ -67,7 +69,7 @@ Record frame time, draw calls, mesh triangles, texture memory, and compressed do
 
 Every row in `ASSET_CATALOG.md` is a separate task.
 Complete its model, materials, UVs, pivot, collision plan, source `.blend`, exported `.glb`, turntable, in-game screenshot, and measured cost before checking it off.
-For buildings, include a traversable interior, doors with clearance, reachable furnishings, and purposeful object interactions in the asset specification.
+For buildings, include a traversable interior, doors with clearance, reachable furnishings, close-range materials, and purposeful object interactions in the asset specification.
 For vehicles, include exterior and cabin views, separate mechanical assemblies, plausible dimensions and mass, and measured motion and contact behavior.
 Shared modular pieces may repeat in the city, while hero buildings, vehicles, characters, and landmarks receive their own designs and source work.
 The catalog can grow past a thousand items, but item count does not substitute for variation in architecture, gameplay, or motion.

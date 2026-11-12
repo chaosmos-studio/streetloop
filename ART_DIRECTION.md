@@ -18,14 +18,20 @@ The third-person camera must keep doors, curbs, wheels, hands, and mission objec
 
 The base palette is warm concrete, faded teal, brick, petrol blue, oxidized copper, charcoal asphalt, and amber light.
 Wet surfaces should be darker and slightly glossier, without becoming mirrors.
-Use rough painted plaster, glazed tile, woven awnings, rubber, cloth, glass, and worn metal as a small shared material library.
-Keep material variation tied to construction, weather, and use instead of random noise.
+Use rough painted plaster, glazed tile, honed and polished stone, matte wood, woven awnings, rubber, cloth, glass, and worn metal as a small shared material library.
+Give every close-range material authored base color, roughness, and normal detail that survives glTF export and the Godot GL Compatibility renderer.
+Keep material variation tied to construction, weather, contact, and use instead of random noise.
+Wood needs grain that follows its cut and a dry matte finish where hands and tools touch it.
+Stone and marble need distinct veining, edge treatment, and finish rather than the same pattern with a different tint.
+Tile needs physical grout depth, alignment, and sensible transitions to thresholds and floor mats.
+Plaster of Paris ceiling work needs shaped coves and fixtures that belong to the building's construction.
 
 ## Visual priority
 
 The player and active vehicles have the clearest silhouette and highest local contrast.
 Interactable doors, job objects, and hazards receive a consistent amber or teal accent and a motion cue when relevant.
 Background buildings remain legible as architecture but use quieter saturation and fewer sharp details.
+Walk-in interiors receive close-range construction detail, individually placed furnishings, readable surfaces, and working objects.
 Signals, crosswalks, lanes, and curbs must remain readable in rain and low light.
 
 ## Motion and contact
@@ -48,3 +54,4 @@ Inspect each asset from front, side, rear, and the gameplay camera distance.
 Check the source and exported model for scale, pivots, normals, UVs, texture colour space, alpha, separate moving parts, and collision boundaries.
 Review movement in motion where the asset animates.
 Record triangles, materials, textures, and on-screen instances after import before claiming a performance cost.
+The current first-pass car, shop, road, and bench are structure and scale studies until their close-range material and interaction reviews pass.

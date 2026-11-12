@@ -189,6 +189,25 @@ Mark a row complete only after the actual Godot camera, collision, and contact t
 - [ ] A147 Hatchback underbody: floorpan, exhaust route, fuel tank, and jack points.
 - [ ] A148 Hatchback cockpit controls: wheel rotation, gauges, handbrake, shifter, and physical input response.
 
+## Repair shop realism benchmark
+
+- [ ] A149 Glazed floor tile module: varied ceramic surface, recessed grout, believable wear, and measured repeat cost.
+- [ ] A150 Honed marble floor insert: original veining, edge profile, slip-safe finish, and a distinct stone family.
+- [ ] A151 Rubber entry mat: raised tread, flexible edge, darkened contact zones, and floor clearance.
+- [ ] A152 Plaster ceiling cove: shaped POP molding, joints, ceiling transition, and room-scale shadow.
+- [ ] A153 Plaster ceiling medallion: restrained relief, centered mounting point, and inspectable edge thickness.
+- [ ] A154 Workshop ceiling fan: motor housing, downrod, guarded electrical feed, balanced blades, and controllable spin.
+- [ ] A155 Fan wall switch: faceplate, rocker, mounting screws, on and off states, and reachable interaction volume.
+- [ ] A156 Service manual: cover, spine, separately turning pages, and original readable technical content.
+- [ ] A157 Usable shop computer: screen, keyboard, mouse, housing, cables, original interface, and input focus states.
+- [ ] A158 Desk task lamp: weighted base, articulated arm, switch, light cone, and cable route.
+- [ ] A159 Wall socket: recessed plate, ground contact, socket geometry, and cable connection point.
+- [ ] A160 Shop chair: load-bearing frame, seat cushion, back support, floor feet, and pull-out clearance.
+- [ ] A161 Tile-to-stone transition: inset trim, different surface heights, and continuous walking collision.
+- [ ] A162 Tool-safe wall cabinet: hinged doors, shelves, latch, and individually inspectable contents.
+- [ ] A163 Service desk paper stack: original forms, individual sheets, and readable close-up surfaces.
+- [ ] A164 Bench surface material: matte wood grain, scratches tied to tool use, edge wear, and packed glTF textures.
+
 ## Per-asset acceptance record
 
 For every asset, record its intended camera distance, dimensions, facing axis, origin, materials, animation clips, collider, texture sizes, triangle count, draw-call contribution, and known limitations in its review folder.
@@ -196,3 +215,5 @@ Keep the checkbox open until Blender views, a Godot import view, and a gameplay 
 For animated assets, include a short motion preview and test interruption or loop transitions.
 Building reviews must include exterior and interior routes, door clearances, object reachability, and contact checks.
 Vehicle reviews must include an all-angle inspection, cabin and underbody views, component motion, mass properties, braking distance, turning circle, and response to curbs and walls.
+Interior object reviews must include an approach view, close inspection, usable state, collision, and return to normal play.
+Books and screens must be readable at their intended inspection distance without borrowed text or interface art.
