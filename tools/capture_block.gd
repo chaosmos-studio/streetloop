@@ -28,6 +28,14 @@ func _capture() -> void:
 	var interior_result: Error = interior.save_png(interior_output)
 	print("Capture: ", interior_output, " ", interior.get_width(), "x", interior.get_height(), " result=", interior_result)
 	print("Interior draw calls: ", Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
+	camera.position = Vector3(10.6, 1.55, -0.3)
+	camera.look_at(Vector3(12.1, 0.9, -1.8))
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var bench_image: Image = root.get_texture().get_image()
+	var bench_output: String = "res://art/review/workbench_material_close.png"
+	var bench_result: Error = bench_image.save_png(bench_output)
+	print("Capture: ", bench_output, " ", bench_image.get_width(), "x", bench_image.get_height(), " result=", bench_result)
 	var door: Node3D = scene.get_node("HarborBlock/Buildings/CornerRepairShop/PublicDoor")
 	print("Open doorway ray: ", _door_ray(scene.get_world_3d()))
 	door.call("set_open", false)
@@ -47,6 +55,8 @@ func _capture() -> void:
 	print("Capture: ", door_output, " ", door_image.get_width(), "x", door_image.get_height(), " result=", door_result)
 	if result == OK:
 		result = interior_result
+	if result == OK:
+		result = bench_result
 	if result == OK:
 		result = door_result
 	quit(result)

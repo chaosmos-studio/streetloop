@@ -97,7 +97,6 @@ shape = SubResource("BoxShape3D_upper_side")
 
 [node name="Workbench" parent="." instance=ExtResource("2_bench")]
 position = Vector3(1.8, 0.16, 2.6)
-rotation = Vector3(0, 3.14159, 0)
 
 [node name="PublicDoor" parent="." instance=ExtResource("3_door")]
 position = Vector3(-3.36, 0, -4.02)

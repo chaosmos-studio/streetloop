@@ -1,5 +1,6 @@
 .godot/
 *.import
+assets/models/*.png
 *.blend1
 *.blend2
 build/
