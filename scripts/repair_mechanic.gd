@@ -1,12 +1,15 @@
 class_name RepairMechanic
 extends CharacterBody3D
 
+signal consulted
+
 @export var walk_speed: float = 1.1
 @export var wait_seconds: float = 2.4
 @export var route_path: NodePath = ^"../MechanicRoute"
 
 @onready var visual: HarborRunnerVisual = $Visual
 @onready var route: Node3D = get_node(route_path)
+@onready var interaction: WorldInteractable = $Interaction
 
 var _waypoints: Array[Marker3D] = []
 var _next_waypoint: int = 1
@@ -17,6 +20,12 @@ var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready() -> void:
 	for marker: Node in route.get_children():
 		_waypoints.append(marker as Marker3D)
+	interaction.activated.connect(_on_consulted)
+
+
+func _on_consulted() -> void:
+	_wait = 3.0
+	consulted.emit()
 
 
 func _physics_process(delta: float) -> void:

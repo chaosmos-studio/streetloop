@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="PackedScene" path="res://assets/models/A085_repair_mechanic.glb" id="1_model"]
 [ext_resource type="Script" path="res://scripts/repair_mechanic.gd" id="2_behavior"]
 [ext_resource type="Script" path="res://scripts/harbor_runner_visual.gd" id="3_visual"]
+[ext_resource type="Script" path="res://scripts/world_interactable.gd" id="4_interaction"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 radius = 0.32
 height = 1.75
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_talk"]
+radius = 0.48
 
 [node name="RepairMechanic" type="CharacterBody3D"]
 collision_layer = 1
@@ -23,3 +27,13 @@ rotation = Vector3(0, 3.14159, 0)
 script = ExtResource("3_visual")
 
 [node name="Model" parent="Visual" instance=ExtResource("1_model")]
+
+[node name="Interaction" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_interaction")
+prompt_text = "Ask about road trial"
+
+[node name="InteractionVolume" type="CollisionShape3D" parent="Interaction"]
+position = Vector3(0, 1.35, 0)
+shape = SubResource("SphereShape3D_talk")

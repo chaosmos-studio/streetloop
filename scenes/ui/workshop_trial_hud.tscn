@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/workshop_trial_hud.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.098, 0.145, 0.149, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.59, 0.56, 0.42, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 15.0
+content_margin_top = 9.0
+content_margin_right = 15.0
+content_margin_bottom = 9.0
+
+[node name="WorkshopTrialHud" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_script")
+
+[node name="Card" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 77.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Content" type="VBoxContainer" parent="Card"]
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Card/Content"]
+theme_override_colors/font_color = Color(0.9, 0.61, 0.46, 1)
+theme_override_font_sizes/font_size = 13
+text = "WORKSHOP TRIAL"
+mouse_filter = 2
+
+[node name="Objective" type="Label" parent="Card/Content"]
+theme_override_colors/font_color = Color(0.95, 0.93, 0.86, 1)
+theme_override_font_sizes/font_size = 17
+text = "Drive to the south road end"
+mouse_filter = 2
