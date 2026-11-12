@@ -15,6 +15,7 @@ var _on: bool = false
 func _ready() -> void:
 	_on = initially_on
 	_update_appearance()
+	$Interaction.activated.connect(toggle)
 
 
 func toggle() -> void:

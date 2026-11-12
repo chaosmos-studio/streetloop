@@ -19,6 +19,7 @@ var controls_enabled: bool = true
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _jump_buffer: float = 0.0
 var _coyote_time: float = 0.0
+var _interact_requested: bool = false
 
 
 func _ready() -> void:
@@ -41,6 +42,9 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if controls_enabled and event.is_action_pressed("jump"):
 		_jump_buffer = 0.12
+		get_viewport().set_input_as_handled()
+	if controls_enabled and event.is_action_pressed("interact"):
+		request_interaction()
 		get_viewport().set_input_as_handled()
 
 
@@ -74,6 +78,27 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = -0.05
 	move_and_slide()
+	if _interact_requested:
+		_interact_requested = false
+		_activate_look_target()
 	if direction.length_squared() > 0.001:
 		visual.rotation.y = lerp_angle(visual.rotation.y, atan2(direction.x, direction.z), minf(1.0, turn_speed * delta))
 	visual.set_motion(horizontal.length(), is_on_floor())
+
+
+func request_interaction() -> void:
+	_interact_requested = true
+
+
+func _activate_look_target() -> void:
+	var origin: Vector3 = global_position + Vector3.UP * 1.4
+	var target: Vector3 = origin - camera.global_transform.basis.z * 2.3
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, target, 4)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	var hit: Dictionary = get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return
+	var interactable: WorldInteractable = hit["collider"] as WorldInteractable
+	if interactable:
+		interactable.activate()

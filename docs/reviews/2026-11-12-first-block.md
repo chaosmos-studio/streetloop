@@ -35,3 +35,6 @@ The first player controller entered the repair shop from the sidewalk during a 7
 The player moved from `(4.7, 0.17, 3.36)` to `(9.52, 0.16, 3.36)` and remained on the floor.
 The gameplay camera captured both the entrance and interior in `art/review/first_player_spawn.png` and `art/review/first_player_shop.png`.
 The character reads at the gameplay distance, but its shoulders, hands, and workwear need the material and form pass recorded in the A001 review.
+The on-foot interaction ray closes and reopens the public door from the entry path.
+The same input turns on the shop fan switch, and the fan reached 3.27 rad/s after 60 physics ticks in the focused interaction run.
+The switch light and rocker show its state while the room stays loaded.

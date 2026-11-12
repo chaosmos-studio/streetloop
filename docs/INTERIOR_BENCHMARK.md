@@ -23,8 +23,8 @@ The player must be able to enter, move around every furnishing, examine each aut
 
 - [ ] Open and close the public door with aligned art, collision, latch, and sound.
 - [ ] Give each furnishing a collision shape and a close inspection position that the camera can reach.
-- [ ] Animate the fan blades with acceleration and coast-down tied to the wall switch.
-- [ ] Make the switch state visible and the fan state persistent while the room remains loaded.
+- [x] Animate the fan blades with acceleration and coast-down tied to the wall switch.
+- [x] Make the switch state visible and the fan state persistent while the room remains loaded.
 - [ ] Let the service manual open, turn pages, and show original legible content.
 - [ ] Let the computer gain input focus, accept player input, and return control cleanly to movement.
 - [ ] Give drawers, cabinets, and loose items individual inspect or use states where their construction suggests one.

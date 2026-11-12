@@ -15,6 +15,7 @@ func _ready() -> void:
 	_target_angle = open_angle if initially_open else 0.0
 	_angle = _target_angle
 	_set_leaf_angle(_angle)
+	$Interaction.activated.connect(_toggle)
 
 
 func _physics_process(delta: float) -> void:
@@ -28,6 +29,10 @@ func set_open(value: bool) -> void:
 
 func is_open() -> bool:
 	return is_equal_approx(_target_angle, open_angle)
+
+
+func _toggle() -> void:
+	set_open(not is_open())
 
 
 func _set_leaf_angle(value: float) -> void:
