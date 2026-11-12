@@ -10,6 +10,9 @@ Read [PLAN.md](PLAN.md), [ART_DIRECTION.md](ART_DIRECTION.md), and [ASSET_CATALO
 
 ## Current playable block
 
+Play the [browser preview](https://chaosmos.studio/streetloop/) on desktop or a landscape phone.
+On a phone, use the left stick to move or steer, drag the open upper screen to look, and use the right buttons to run, jump, interact, brake, or exit.
+
 Walk from the harbor sidewalk into the repair shop, use the door and fan switch, read the service manual, and run the fan diagnostic on the workbench terminal.
 The Tide hatchback is parked beside the sidewalk. Look at its driver door and press E to enter. Use W and S for throttle and reverse, A and D to steer, Space to brake, and E to exit after stopping.
 On foot, use WASD to move, Shift to sprint, Space to jump, the mouse to look, and E to interact. Gamepad movement and interaction are mapped in `project.godot`.
