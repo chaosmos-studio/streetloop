@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A003_straight_harbor_road.glb" id="1_road"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_road"]
+size = Vector3(7, 0.14, 32)
+
+[node name="RoadSegment" type="StaticBody3D"]
+
+[node name="Art" parent="." instance=ExtResource("1_road")]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, -0.07, 0)
+shape = SubResource("BoxShape3D_road")

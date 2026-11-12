@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A006_corner_repair_shop.glb" id="1_shop"]
+[ext_resource type="PackedScene" path="res://scenes/world/mechanic_workbench.tscn" id="2_bench"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(10.05, 0.22, 8.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rear"]
+size = Vector3(10, 3.47, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_side"]
+size = Vector3(0.24, 3.47, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_left_pier"]
+size = Vector3(0.96, 3.55, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_middle_pier"]
+size = Vector3(1.22, 3.55, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_right_pier"]
+size = Vector3(1.3, 3.55, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lintel"]
+size = Vector3(10, 0.62, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_upper_floor"]
+size = Vector3(10.05, 0.24, 8.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_roof"]
+size = Vector3(10.05, 0.25, 8.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_upper_rear"]
+size = Vector3(10, 3.14, 0.24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_upper_side"]
+size = Vector3(0.24, 3.14, 8)
+
+[node name="RepairShop" type="Node3D"]
+
+[node name="Art" parent="." instance=ExtResource("1_shop")]
+
+[node name="Structure" type="StaticBody3D" parent="."]
+
+[node name="GroundFloor" type="CollisionShape3D" parent="Structure"]
+position = Vector3(0, 0.05, 0)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="RearWall" type="CollisionShape3D" parent="Structure"]
+position = Vector3(0, 1.83, 3.88)
+shape = SubResource("BoxShape3D_rear")
+
+[node name="LeftWall" type="CollisionShape3D" parent="Structure"]
+position = Vector3(-4.88, 1.83, 0)
+shape = SubResource("BoxShape3D_side")
+
+[node name="RightWall" type="CollisionShape3D" parent="Structure"]
+position = Vector3(4.88, 1.83, 0)
+shape = SubResource("BoxShape3D_side")
+
+[node name="FrontLeftPier" type="CollisionShape3D" parent="Structure"]
+position = Vector3(-4.52, 1.79, -3.88)
+shape = SubResource("BoxShape3D_left_pier")
+
+[node name="FrontMiddlePier" type="CollisionShape3D" parent="Structure"]
+position = Vector3(-1.96, 1.79, -3.88)
+shape = SubResource("BoxShape3D_middle_pier")
+
+[node name="FrontRightPier" type="CollisionShape3D" parent="Structure"]
+position = Vector3(4.35, 1.79, -3.88)
+shape = SubResource("BoxShape3D_right_pier")
+
+[node name="FrontLintel" type="CollisionShape3D" parent="Structure"]
+position = Vector3(0, 3.4, -3.88)
+shape = SubResource("BoxShape3D_lintel")
+
+[node name="UpperFloor" type="CollisionShape3D" parent="Structure"]
+position = Vector3(0, 3.69, 0)
+shape = SubResource("BoxShape3D_upper_floor")
+
+[node name="Roof" type="CollisionShape3D" parent="Structure"]
+position = Vector3(0, 7.05, 0)
+shape = SubResource("BoxShape3D_roof")
+
+[node name="UpperRearWall" type="CollisionShape3D" parent="Structure"]
+position = Vector3(0, 5.38, 3.88)
+shape = SubResource("BoxShape3D_upper_rear")
+
+[node name="UpperLeftWall" type="CollisionShape3D" parent="Structure"]
+position = Vector3(-4.88, 5.38, 0)
+shape = SubResource("BoxShape3D_upper_side")
+
+[node name="UpperRightWall" type="CollisionShape3D" parent="Structure"]
+position = Vector3(4.88, 5.38, 0)
+shape = SubResource("BoxShape3D_upper_side")
+
+[node name="Workbench" parent="." instance=ExtResource("2_bench")]
+position = Vector3(1.8, 0.16, 2.6)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="ServiceBayLight" type="OmniLight3D" parent="."]
+position = Vector3(1.6, 3.15, 0)
+light_color = Color(1, 0.86, 0.69, 1)
+light_energy = 1.3
+omni_range = 7.0
+
+[node name="CounterLight" type="OmniLight3D" parent="."]
+position = Vector3(-3.2, 3.15, 0.7)
+light_color = Color(1, 0.89, 0.75, 1)
+light_energy = 0.9
+omni_range = 5.0

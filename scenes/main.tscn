@@ -1,3 +1,82 @@
-[gd_scene format=3]
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world/road_segment.tscn" id="1_road"]
+[ext_resource type="PackedScene" path="res://scenes/world/sidewalk_segment.tscn" id="2_sidewalk"]
+[ext_resource type="PackedScene" path="res://scenes/world/repair_shop.tscn" id="3_shop"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
+albedo_color = Color(0.43, 0.48, 0.43, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+material = SubResource("StandardMaterial3D_ground")
+size = Vector3(80, 0.2, 80)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(80, 0.2, 80)
+
+[sub_resource type="Environment" id="Environment_day"]
+background_mode = 1
+background_color = Color(0.70, 0.78, 0.79, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.78, 0.82, 0.78, 1)
+ambient_light_energy = 0.3
+reflected_light_source = 1
+tonemap_mode = 0
 
 [node name="Streetloop" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.23, 0)
+
+[node name="Art" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_ground")
+
+[node name="Collision" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_ground")
+
+[node name="HarborBlock" type="Node3D" parent="."]
+
+[node name="Roads" type="Node3D" parent="HarborBlock"]
+
+[node name="SouthRoad" parent="HarborBlock/Roads" instance=ExtResource("1_road")]
+position = Vector3(0, 0, 16)
+
+[node name="NorthRoad" parent="HarborBlock/Roads" instance=ExtResource("1_road")]
+position = Vector3(0, 0, -16)
+
+[node name="Sidewalks" type="Node3D" parent="HarborBlock"]
+
+[node name="EastSouthSidewalk" parent="HarborBlock/Sidewalks" instance=ExtResource("2_sidewalk")]
+position = Vector3(4.5, 0, 16)
+
+[node name="EastNorthSidewalk" parent="HarborBlock/Sidewalks" instance=ExtResource("2_sidewalk")]
+position = Vector3(4.5, 0, -16)
+
+[node name="WestSouthSidewalk" parent="HarborBlock/Sidewalks" instance=ExtResource("2_sidewalk")]
+position = Vector3(-4.5, 0, 16)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="WestNorthSidewalk" parent="HarborBlock/Sidewalks" instance=ExtResource("2_sidewalk")]
+position = Vector3(-4.5, 0, -16)
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Buildings" type="Node3D" parent="HarborBlock"]
+
+[node name="CornerRepairShop" parent="HarborBlock/Buildings" instance=ExtResource("3_shop")]
+position = Vector3(9.5, 0, 0)
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.83, -0.72, -0.22)
+light_energy = 0.75
+shadow_enabled = true
+
+[node name="Atmosphere" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_day")
+
+[node name="ReviewCamera" type="Camera3D" parent="."]
+position = Vector3(-10, 8, 14)
+rotation = Vector3(-0.285, -0.82, 0)
+current = true
+fov = 65.0

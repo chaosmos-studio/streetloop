@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A005_harbor_sidewalk.glb" id="1_sidewalk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sidewalk"]
+size = Vector3(2, 0.17, 32)
+
+[node name="SidewalkSegment" type="StaticBody3D"]
+
+[node name="Art" parent="." instance=ExtResource("1_sidewalk")]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.085, 0)
+shape = SubResource("BoxShape3D_sidewalk")
