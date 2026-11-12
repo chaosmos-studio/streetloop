@@ -3,7 +3,8 @@
 The model is 2 m wide and 32 m long, with an intended 0.17 m walking surface and a 0.19 m curb lip.
 The origin is centered on the ground plane, with the street-facing edge at local X = -1 m.
 Blender reports 252 triangles across 21 objects and five materials.
-The exported GLB is 26,236 bytes.
+The exported GLB now groups the 21 editable source objects into five static meshes by material.
+The grouped export is about 18 KiB.
 The paving pattern is authored as separate shallow fields over a continuous base, so gameplay collision can use one simple shape.
 
 ## Pending review

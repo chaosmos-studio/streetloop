@@ -5,6 +5,9 @@ The exterior and interior were captured at 1280 x 720 using the GL Compatibility
 The exterior rendered 770 draw calls and 24,542 primitives in the measured frame.
 The interior rendered 398 draw calls in the measured frame.
 These numbers include scene lighting and shadow passes, and they describe one review camera frame rather than a gameplay performance profile.
+Grouping only the repeated road and sidewalk exports by material lowered the same exterior view to 556 draw calls and the interior view to 369.
+The grouped exports retain 14 road parts and 21 sidewalk parts in their editable Blender sources.
+The images in this review show the grouped exports and were recaptured after the Godot reimport.
 
 The road and sidewalk meet visually along the shop side in the exterior capture.
 The shop's wall and floor meshes create an actual interior volume, and the workbench appears inside it at room scale.
