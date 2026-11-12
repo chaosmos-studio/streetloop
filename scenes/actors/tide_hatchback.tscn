@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://assets/models/A002_harbor_compact_car.glb" id="1_body"]
+[ext_resource type="PackedScene" path="res://assets/models/A137_tide_hatchback_exterior.glb" id="1_body"]
 [ext_resource type="PackedScene" path="res://assets/models/A141_hatchback_wheel_and_tire.glb" id="2_wheel"]
 [ext_resource type="Script" path="res://scripts/tide_hatchback.gd" id="3_script"]
 [ext_resource type="Script" path="res://scripts/world_interactable.gd" id="4_interaction"]
+[ext_resource type="PackedScene" path="res://assets/models/A138_tide_hatchback_cabin.glb" id="5_cabin"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_body"]
 size = Vector3(1.64, 0.74, 3.72)
@@ -26,6 +27,9 @@ script = ExtResource("3_script")
 shape = SubResource("BoxShape3D_body")
 
 [node name="BodyArt" parent="." instance=ExtResource("1_body")]
+position = Vector3(0, -0.85, 0)
+
+[node name="CabinArt" parent="." instance=ExtResource("5_cabin")]
 position = Vector3(0, -0.85, 0)
 
 [node name="Wheels" type="Node3D" parent="."]
