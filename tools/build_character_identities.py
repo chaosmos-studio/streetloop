@@ -1,6 +1,7 @@
 """Build editable adult identity studies from the reviewed anatomy source."""
 
 import math
+import random
 import sys
 from pathlib import Path
 
@@ -211,25 +212,95 @@ def bevelled_box(name, xyz, dimensions, bevel_width, surface, rig, bone):
     return obj
 
 
+def constructed_shoe(side, center_x, rig, leather, rubber, lace_surface):
+    profiles = [(-0.165, 0.032, 0.052), (-0.120, 0.072, 0.080), (-0.045, 0.082, 0.095), (0.055, 0.075, 0.110), (0.125, 0.045, 0.085), (0.150, 0.008, 0.045)]
+    vertices = []
+    faces = []
+    segments = 12
+    for y, half_width, height in profiles:
+        for segment in range(segments):
+            angle = math.tau * segment / segments
+            vertices.append((center_x + half_width * math.cos(angle), y, max(0.036, 0.045 + height * math.sin(angle))))
+    for row in range(len(profiles) - 1):
+        for segment in range(segments):
+            next_segment = (segment + 1) % segments
+            faces.append((row * segments + segment, row * segments + next_segment, (row + 1) * segments + next_segment, (row + 1) * segments + segment))
+    faces.append(tuple(reversed(range(segments))))
+    faces.append(tuple((len(profiles) - 1) * segments + segment for segment in range(segments)))
+    mesh = bpy.data.meshes.new(f"Constructed shoe {side} mesh")
+    mesh.from_pydata(vertices, [], faces)
+    mesh.materials.append(leather)
+    mesh.update()
+    upper = bpy.data.objects.new(f"Leather shoe {side}", mesh)
+    bpy.context.collection.objects.link(upper)
+    attach_bone(upper, rig, f"foot.{side}")
+    for face in mesh.polygons:
+        face.use_smooth = True
+
+    outline = [(0.0, -0.182), (0.055, -0.169), (0.087, -0.117), (0.091, -0.022), (0.083, 0.071), (0.058, 0.133), (0.0, 0.150), (-0.058, 0.133), (-0.083, 0.071), (-0.091, -0.022), (-0.087, -0.117), (-0.055, -0.169)]
+    sole_vertices = [(center_x + x, y, z) for z in (0.012, 0.039) for x, y in outline]
+    sole_faces = []
+    count = len(outline)
+    sole_faces.append(tuple(reversed(range(count))))
+    sole_faces.append(tuple(range(count, count * 2)))
+    for index in range(count):
+        following = (index + 1) % count
+        sole_faces.append((index, following, following + count, index + count))
+    sole_mesh = bpy.data.meshes.new(f"Shoe sole {side} mesh")
+    sole_mesh.from_pydata(sole_vertices, [], sole_faces)
+    sole_mesh.materials.append(rubber)
+    sole_mesh.update()
+    sole = bpy.data.objects.new(f"Shoe sole {side}", sole_mesh)
+    bpy.context.collection.objects.link(sole)
+    bevel = sole.modifiers.new("Soft sole edge", "BEVEL")
+    bevel.width = 0.006
+    bevel.segments = 2
+    sole.modifiers.new("Weighted sole normals", "WEIGHTED_NORMAL")
+    attach_bone(sole, rig, f"foot.{side}")
+    for index in range(4):
+        y = -0.085 + index * 0.035
+        bevelled_box(f"Lace {side} {index}", (center_x, y, 0.130 + index * 0.006), (0.080, 0.005, 0.003), 0.001, lace_surface, rig, f"foot.{side}")
+
+
 def hair(rig, surface, style):
     sphere(f"Hair_{style}_cap", (0, -0.009, 1.726), (0.100, 0.113, 0.077), surface, rig, "head", 32)
-    count = 64 if style == "short" else 96
+    rng = random.Random({"sweep": 421, "short": 367, "curl": 829}[style])
+    count = 1800 if style == "short" else 2600
+    vertices = []
+    faces = []
     for index in range(count):
-        angle = math.tau * index * 0.61803398875
-        radius = math.sqrt((index + 0.5) / count)
-        x = math.cos(angle) * radius * 0.087
-        y = math.sin(angle) * radius * 0.096 - 0.010
-        z = 1.770 - 0.035 * radius
-        if style == "sweep":
-            z += 0.025 * (1.0 - radius)
-            x += 0.012 * radius
-        elif style == "curl":
-            z += 0.01 * math.sin(index * 2.2)
-        size = (0.021, 0.022, 0.021) if style == "curl" else (0.017, 0.020, 0.014)
-        sphere(f"Hair_{style}_{index:02d}", (x, y, z), size, surface, rig, "head", 8)
-    if style == "sweep":
-        for index in range(12):
-            sphere(f"Hair_sweep_fringe_{index:02d}", (-0.065 + 0.010 * index, -0.102, 1.715 - index * 0.001), (0.008, 0.018, 0.025), surface, rig, "head", 8)
+        angle = math.tau * (index * 0.61803398875 + rng.uniform(-0.018, 0.018))
+        polar = math.acos(1.0 - 0.91 * ((index + 0.5) / count))
+        root = Vector((0.100 * math.sin(polar) * math.cos(angle), -0.009 + 0.113 * math.sin(polar) * math.sin(angle), 1.726 + 0.077 * math.cos(polar)))
+        radial = Vector((math.cos(angle), math.sin(angle), -0.30)).normalized()
+        length = rng.uniform(0.006, 0.013) if style == "short" else rng.uniform(0.010, 0.020)
+        sweep = Vector((0.18, 0, 0.05)) if style == "sweep" else Vector((0, 0, 0))
+        curl = Vector((0.34 * math.sin(index * 2.4), 0.34 * math.cos(index * 2.4), 0.12)) if style == "curl" else Vector((0, 0, 0))
+        tangent = (radial + sweep + curl).normalized()
+        side = tangent.cross(Vector((0, 0, 1))).normalized()
+        if side.length_squared < 0.1:
+            side = Vector((1, 0, 0))
+        up = tangent.cross(side).normalized()
+        radius = rng.uniform(0.00055, 0.00095)
+        for step in range(4):
+            fraction = step / 3.0
+            center = root + tangent * length * fraction + Vector((0, 0, -0.008 * fraction * fraction))
+            width = radius * max(0.04, 1.0 - fraction)
+            for corner in range(3):
+                direction = side * math.cos(math.tau * corner / 3) + up * math.sin(math.tau * corner / 3)
+                vertices.append(tuple(center + direction * width))
+        first = index * 12
+        for step in range(3):
+            for corner in range(3):
+                following = (corner + 1) % 3
+                faces.append((first + step * 3 + corner, first + step * 3 + following, first + (step + 1) * 3 + following, first + (step + 1) * 3 + corner))
+    mesh = bpy.data.meshes.new(f"Hair_{style}_strands mesh")
+    mesh.from_pydata(vertices, [], faces)
+    mesh.materials.append(surface)
+    mesh.update()
+    strands = bpy.data.objects.new(f"Hair_{style}_strands", mesh)
+    bpy.context.collection.objects.link(strands)
+    attach_bone(strands, rig, "head")
 
 
 def join_hair():
@@ -327,8 +398,8 @@ def build_identity(name, spec):
     attach_auto(body, rig)
     for obj in list(bpy.data.objects):
         if obj.name.startswith("A001 eye") or obj.name.startswith("A001 iris"):
-            obj.scale *= 0.82
-            obj.location.y += 0.009
+            obj.scale *= 0.73
+            obj.location.y += 0.016
             obj.data.materials.clear()
             obj.data.materials.append(eye_white if obj.name.startswith("A001 eye") else iris_mat)
             attach_bone(obj, rig, "head")
@@ -337,10 +408,7 @@ def build_identity(name, spec):
     ring("Cotton collar", (0, 0, 1.492), 0.074, 0.014, (1.20, 1.0, 1.0), fabric, rig, "neck")
     foot_x = 0.16 if name == "mara" else 0.215
     for side, sign in (("L", 1), ("R", -1)):
-        sphere(f"Leather shoe {side}", (sign * foot_x, -0.015, 0.08), (0.095, 0.155, 0.065), leather, rig, f"foot.{side}", 24)
-        sphere(f"Shoe sole {side}", (sign * foot_x, -0.015, 0.022), (0.10, 0.16, 0.023), rubber, rig, f"foot.{side}", 24)
-        for lace in range(3):
-            bevelled_box(f"Lace {side} {lace}", (sign * foot_x, -0.075 + 0.025 * lace, 0.125), (0.07, 0.006, 0.003), 0.001, button, rig, f"foot.{side}")
+        constructed_shoe(side, sign * foot_x, rig, leather, rubber, button)
     for index, z in enumerate((1.12, 1.19, 1.26, 1.33)):
         sphere(f"Shirt button {index}", (0, -0.142, z), (0.009, 0.004, 0.009), button, rig, "spine" if z < 1.30 else "chest", 12)
     hair(rig, hair_mat, {"mara": "sweep", "dev": "short", "sol": "curl"}[name])
