@@ -11,11 +11,11 @@ Mark a row complete only after the actual Godot camera, collision, and contact t
 ## First block and scale set
 
 - [ ] A001 Harbor runner: playable adult with rig, clothes, and readable locomotion silhouette.
-- [ ] A002 Tide hatchback: compact enterable car with separate wheels, doors, and lamps.
+- [ ] A002 Tide hatchback: compact enterable car with complete cabin, underbody, steering wheel, seats, separate doors, wheels, lamps, and suspension attachment points.
 - [ ] A003 Straight harbor road: two lanes with worn paint, crown, drainage, and join edges.
 - [ ] A004 Four-way junction: matching road camber, turn radii, stop lines, and seams.
 - [ ] A005 Harbor sidewalk: modular curb with bevel, gutter, tactile corner, and drain slope.
-- [ ] A006 Corner repair shop: recessed entrance, shutters, awning, sign frame, and roof access.
+- [ ] A006 Corner repair shop: walk-in ground floor, recessed entrance, working shutters, awning, sign frame, stair, roof access, and furnished service area.
 - [ ] A007 Twin-arm streetlamp: cast base, bent pole, service panel, and separate lamp heads.
 - [ ] A008 Parked commuter bicycle: frame, chain guard, kickstand, and wheel silhouettes.
 - [ ] A009 Harbor bollard: impact-scarred cast iron with reflective band and pavement socket.
@@ -158,8 +158,41 @@ Mark a row complete only after the actual Godot camera, collision, and contact t
 - [ ] A119 Apartment stairwell: repeatable landings, railings, doors, and lighting slots.
 - [ ] A120 Harbor safehouse room: readable entry, storage, desk, and window view.
 
+## First walk-in interior and vehicle assemblies
+
+- [ ] A121 Repair shop structural interior: floor, walls, ceiling, columns, and service-bay clearances.
+- [ ] A122 Repair shop public door: frame, handle, hinge, latch, and open and closed collision states.
+- [ ] A123 Repair shop stair: repeated steps, landing, handrail, and roof door.
+- [ ] A124 Repair shop service counter: solid front, working top, storage side, and touchable objects.
+- [ ] A125 Mechanic workbench: steel frame, worn wood top, vise, and accessible drawers.
+- [ ] A126 Tool pegboard: individually readable tool outlines and removal points.
+- [ ] A127 Hydraulic floor jack: handle pivot, wheels, saddle, and lift range.
+- [ ] A128 Tire rack: steel supports and separate removable tire slots.
+- [ ] A129 Parts shelves: open bays with distinct boxed components and collision clearances.
+- [ ] A130 Ceiling task lights: housings, guards, switches, and visible work area.
+- [ ] A131 Oil drum: sealed top, rolling body, grip lip, and marked interaction point.
+- [ ] A132 Receipt desk: chair, terminal, cash drawer, and customer-side approach.
+- [ ] A133 Wall clock: deep frame, hands, and readable face without borrowed branding.
+- [ ] A134 Shop sink: basin, faucet, drain, and plumbing under the counter.
+- [ ] A135 First-aid cabinet: openable door and separate contents.
+- [ ] A136 Shop fire extinguisher: wall mount, safety pin, hose, and pick-up pivot.
+- [ ] A137 Hatchback exterior body: formed panels, seams, wheel arches, trim, and damage zones.
+- [ ] A138 Hatchback cabin: dashboard, seats, steering column, pedals, mirrors, belts, and door cards.
+- [ ] A139 Hatchback front doors: hinges, handles, glass, seals, and opening clearance.
+- [ ] A140 Hatchback rear doors: hinges, handles, glass, seals, and opening clearance.
+- [ ] A141 Hatchback wheel and tire: tread, rim, hub, brake disc, caliper, and rotation axis.
+- [ ] A142 Hatchback front suspension: strut, steering linkage, spring, and measured travel.
+- [ ] A143 Hatchback rear suspension: arms, spring, damper, and measured travel.
+- [ ] A144 Hatchback engine bay: compact power unit, cooling, air intake, and access panels.
+- [ ] A145 Hatchback lighting set: headlamps, indicators, brake lamps, reverse lamps, and night readability.
+- [ ] A146 Hatchback hatch: lift pivot, latch, cargo opening, and collision clearance.
+- [ ] A147 Hatchback underbody: floorpan, exhaust route, fuel tank, and jack points.
+- [ ] A148 Hatchback cockpit controls: wheel rotation, gauges, handbrake, shifter, and physical input response.
+
 ## Per-asset acceptance record
 
 For every asset, record its intended camera distance, dimensions, facing axis, origin, materials, animation clips, collider, texture sizes, triangle count, draw-call contribution, and known limitations in its review folder.
 Keep the checkbox open until Blender views, a Godot import view, and a gameplay view exist.
 For animated assets, include a short motion preview and test interruption or loop transitions.
+Building reviews must include exterior and interior routes, door clearances, object reachability, and contact checks.
+Vehicle reviews must include an all-angle inspection, cabin and underbody views, component motion, mass properties, braking distance, turning circle, and response to curbs and walls.
