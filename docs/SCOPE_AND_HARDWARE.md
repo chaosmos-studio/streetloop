@@ -20,6 +20,25 @@ On 2026-11-13 the machine reported an Intel Core i5-12500H, Intel Iris Xe graphi
 This machine can build the first block and review small assets in Godot 4.7 and Blender 5.2.2.
 Memory and storage are already tight for a realistic city asset library and parallel Blender, Godot, and texture work.
 
+## What this laptop can complete
+
+The current machine can author one detailed hero asset at a time and run a small, optimized Godot block.
+It completed the 1.77 m A001 anatomy source with three sculpt subdivision levels, a 2048 px skin color bake, five Blender review renders, and a Godot Compatibility import under a 3 GiB process cap.
+That study produced a 15.2 MB editable source, a 2.3 MB proxy glTF, and a 1.4 MB skin image.
+The source has no animation rig or wardrobe yet, so this benchmark does not establish the cost of a finished character.
+
+A practical local target is one polished character, one furnished building, a small street population, one vehicle, and a few complete activities in a continuously playable neighborhood.
+More districts can be authored sequentially with shared materials, streaming, and separate levels of detail.
+The present integrated GPU, 15 GiB usable RAM, and 65 GiB of free workspace storage make full-density city validation and large high-resolution asset libraries a major risk.
+Remote rendering or a stronger workstation can take the heavy bake and performance-review stages while this laptop remains useful for code, design, and small scene iteration.
+The share of the full game completed here is therefore limited by content and review time as well as hardware, not by a fixed percentage.
+
+Three real-display runs of the existing harbor block on this laptop sampled 120 walking frames each at 1280 by 720 in Godot 4.7 Compatibility.
+They averaged 43.4 to 53.7 frames per second, with mean frame times of 18.62 to 23.06 ms and 95th-percentile frame times of 33.32 to 76.08 ms.
+The scene drew about 1,343 to 1,371 calls and 220,007 to 221,655 primitives per sampled frame.
+These short runs had other desktop work open and do not isolate CPU, GPU, thermal, or background-process cost.
+The present block does not yet hold a steady 60 fps in this test, so a denser city needs profiling and optimization before expansion.
+
 ## Practical development hardware
 
 | Work | RAM | Graphics memory | Fast local storage |
