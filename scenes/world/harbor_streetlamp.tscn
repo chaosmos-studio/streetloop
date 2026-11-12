@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A007_harbor_twin_arm_streetlamp.glb" id="1_art"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_base"]
+radius = 0.32
+height = 0.36
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pole"]
+radius = 0.145
+height = 5.15
+
+[node name="HarborStreetlamp" type="StaticBody3D"]
+
+[node name="Art" parent="." instance=ExtResource("1_art")]
+
+[node name="BaseCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.18, 0)
+shape = SubResource("CylinderShape3D_base")
+
+[node name="PoleCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 2.92, 0)
+shape = SubResource("CylinderShape3D_pole")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/road_segment.tscn" id="1_road"]
 [ext_resource type="PackedScene" path="res://scenes/world/sidewalk_segment.tscn" id="2_sidewalk"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/service_manual_view.tscn" id="7_manual_view"]
 [ext_resource type="PackedScene" path="res://scenes/actors/tide_hatchback.tscn" id="8_car"]
 [ext_resource type="PackedScene" path="res://scenes/ui/vehicle_hud.tscn" id="9_vehicle_hud"]
+[ext_resource type="PackedScene" path="res://scenes/world/harbor_streetlamp.tscn" id="10_lamp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
 albedo_color = Color(0.43, 0.48, 0.43, 1)
@@ -73,6 +74,20 @@ rotation = Vector3(0, 3.14159, 0)
 [node name="CornerRepairShop" parent="HarborBlock/Buildings" instance=ExtResource("3_shop")]
 position = Vector3(9.5, 0, 0)
 rotation = Vector3(0, 1.5708, 0)
+
+[node name="Streetlamps" type="Node3D" parent="HarborBlock"]
+
+[node name="EastSouthLamp" parent="HarborBlock/Streetlamps" instance=ExtResource("10_lamp")]
+position = Vector3(5.05, 0.16, 13.5)
+
+[node name="EastNorthLamp" parent="HarborBlock/Streetlamps" instance=ExtResource("10_lamp")]
+position = Vector3(5.05, 0.16, -13.5)
+
+[node name="WestSouthLamp" parent="HarborBlock/Streetlamps" instance=ExtResource("10_lamp")]
+position = Vector3(-5.05, 0.16, 13.5)
+
+[node name="WestNorthLamp" parent="HarborBlock/Streetlamps" instance=ExtResource("10_lamp")]
+position = Vector3(-5.05, 0.16, -13.5)
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 rotation = Vector3(-0.83, -0.72, -0.22)
