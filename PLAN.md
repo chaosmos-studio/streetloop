@@ -2,6 +2,8 @@
 
 The first goal is a city block that is enjoyable to cross on foot and by car.
 Each milestone ends with a playable build and a short review of movement, visual clarity, and measured cost.
+The broader game vision is [LIFE](docs/LIFE_VISION.md).
+This plan remains the technical foundation for its first neighborhood.
 
 ## M0: A convincing block
 
