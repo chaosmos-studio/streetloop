@@ -14,8 +14,11 @@ The shop's wall and floor meshes create an actual interior volume, and the workb
 The first interior capture was too dark, so two provisional task lights were added before the recorded view.
 The exterior facade and the bench remain legible, while the interior is sparse and needs the individual furnishings listed in the catalog.
 
-The closed door and shutter are currently visual meshes without synchronized collision or opening behavior.
+The garage shutter remains a visual mesh without synchronized collision or opening behavior.
 The upper floor has no stair route yet.
 The current camera is fixed for asset review, and no player or vehicle controller has been integrated.
 Static export meshes must be grouped by material while retaining editable Blender parts and separate interactive components.
 The next review must measure the draw-call change, prove doorway and furnishing clearance with the player capsule, and inspect the car from the driving camera.
+The hinged A122 door replaced the shop's decorative leaf, and its closed close-up is in `art/review/repair_shop_door_closed.png`.
+An open doorway ray was clear and the same ray hit `LeafBody` after closing, which checks the collider state along the intended entry path.
+The exterior view measured 640 draw calls after the separate door was added.

@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A122_repair_shop_public_door.glb" id="1_art"]
+[ext_resource type="Script" path="res://scripts/public_door.gd" id="2_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_leaf"]
+size = Vector3(1.29, 2.67, 0.075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jamb"]
+size = Vector3(0.06, 2.89, 0.18)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_head"]
+size = Vector3(1.46, 0.08, 0.18)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_threshold"]
+size = Vector3(1.46, 0.06, 0.24)
+
+[node name="PublicDoor" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="Art" parent="." instance=ExtResource("1_art")]
+
+[node name="FixedFrame" type="StaticBody3D" parent="."]
+
+[node name="LeftJamb" type="CollisionShape3D" parent="FixedFrame"]
+position = Vector3(-0.7, 1.6, 0)
+shape = SubResource("BoxShape3D_jamb")
+
+[node name="RightJamb" type="CollisionShape3D" parent="FixedFrame"]
+position = Vector3(0.7, 1.6, 0)
+shape = SubResource("BoxShape3D_jamb")
+
+[node name="Head" type="CollisionShape3D" parent="FixedFrame"]
+position = Vector3(0, 3.025, 0)
+shape = SubResource("BoxShape3D_head")
+
+[node name="Threshold" type="CollisionShape3D" parent="FixedFrame"]
+position = Vector3(0, 0.18, 0)
+shape = SubResource("BoxShape3D_threshold")
+
+[node name="LeafBody" type="AnimatableBody3D" parent="."]
+position = Vector3(-0.635, 0, 0)
+
+[node name="LeafCollision" type="CollisionShape3D" parent="LeafBody"]
+position = Vector3(0.635, 1.53, 0)
+shape = SubResource("BoxShape3D_leaf")

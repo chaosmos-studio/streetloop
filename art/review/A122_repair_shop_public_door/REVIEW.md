@@ -6,6 +6,9 @@ The leaf parts are children of `DoorLeafPivot`, whose origin sits on the left hi
 The frame and latch strike remain stationary.
 The glTF preserves the hinge pivot and its 19 child meshes, and contains no unrelated objects.
 The source was inspected in the live Blender viewport from the exterior front quarter.
+The Godot wrapper drives the glTF pivot and an `AnimatableBody3D` leaf with the same angle.
+At the tested frame, an exterior-to-interior ray through the open doorway was clear, while the closed doorway hit `LeafBody`.
+The closed door art and collider angles both reached zero, and the close-up render is in `art/review/repair_shop_door_closed.png`.
 
 ## Pending review
 
