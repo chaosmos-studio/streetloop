@@ -29,3 +29,17 @@ Internal anatomy guides can remain in the sculpt source without adding invisible
 
 The current body proxy is a measurement and shading reference, not a playable character.
 The next unit is the character's original face and skin surface, followed by the deformation rig.
+
+## Creator work units
+
+- [ ] Review multiple original adult face and body bases at front, profile, rear, and gameplay distances.
+- [ ] Review skin tones under daylight, shade, and interior light without losing facial structure.
+- [ ] Fit at least two hair silhouettes and one facial-hair option to each head shape.
+- [ ] Fit clothing shapes and material variants without clipping at walking, crouching, and driving extremes.
+- [ ] Rig every selectable body to the same skeleton and review walk, run, turn, jump, sit, and idle in motion.
+- [ ] Build a rotatable creator preview with clear identity and appearance choices.
+- [ ] Save and reload the choice, then use it for the live player in the harbor route.
+- [ ] Measure draw calls, triangles, texture memory, and frame cost for each combination.
+
+Do not expose a choice until its art changes visibly in both the preview and the live player.
+Keep the authoring source, exports, camera review, and acceptance notes for every identity.
