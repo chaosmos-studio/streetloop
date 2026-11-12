@@ -6,8 +6,10 @@ The public preview is https://chaosmos.studio/streetloop/.
 
 ## Next focused slice
 
-Improve the skinned A001 candidate's anatomy and create contact-aware walking and running before changing the playable model.
-The current candidate and its failed review are in `art/review/A001_human_runner_lab/REVIEW.md`.
+Build the original face and skin surface on the new A001 anatomy study, then rig it for contact-aware walking and running.
+The full character breakdown is in `docs/CHARACTER_DETAIL_PLAN.md`.
+The anatomy review is in `art/review/A001_anatomy_study/REVIEW.md`.
+The earlier skinned candidate and its failed motion review remain in `art/review/A001_human_runner_lab/REVIEW.md`.
 Keep the existing controller and car route working while the replacement is reviewed.
 
 ## Current evidence
@@ -15,6 +17,7 @@ Keep the existing controller and car route working while the replacement is revi
 The last committed route check drove the workshop trial south, north, and back under real Godot vehicle physics.
 The A001 source and review identify round shoulders, mitten hands, a simple face, no deforming skeleton, and no foot IK.
 The new Blender candidate imports with 18 bones and five clips, but its feet slide and its modeling is not yet acceptable.
+The anatomical study imports at 1.77 m with 24,392 triangles and five meshes, but it has no production rig or clothing.
 The current machine has an i5-12500H, Intel Iris Xe graphics, 16 GiB RAM, and about 65 GiB free on the workspace volume.
 
 ## Open risks
