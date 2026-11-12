@@ -12,7 +12,7 @@ signal focused_interactable_changed(text: String)
 @export var mouse_sensitivity: float = 0.0024
 @export var gamepad_look_speed: float = 2.5
 
-@onready var visual: HarborRunnerVisual = $Visual
+@onready var visual: CharacterAppearance = $Visual
 @onready var camera_yaw: Node3D = $CameraYaw
 @onready var spring_arm: SpringArm3D = $CameraYaw/SpringArm3D
 @onready var camera: Camera3D = $CameraYaw/SpringArm3D/Camera3D
@@ -28,6 +28,7 @@ var _focused_text: String = ""
 
 func _ready() -> void:
 	spring_arm.add_excluded_object(get_rid())
+	visual.apply_choice(CharacterChoice.read_saved())
 	if not DisplayServer.is_touchscreen_available():
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 

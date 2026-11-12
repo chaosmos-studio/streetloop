@@ -11,6 +11,7 @@ extends Node3D
 @onready var tide_hatchback: TideHatchback = $TideHatchback
 @onready var vehicle_hud: VehicleHud = $VehicleHud
 @onready var touch_controls: TouchControls = $TouchControls
+@onready var character_creator: CharacterCreatorView = $CharacterCreatorView
 
 var _driving: bool = false
 
@@ -28,6 +29,30 @@ func _ready() -> void:
 	touch_controls.bind(player, tide_hatchback)
 	vehicle_hud.set_touch_mode(touch_controls.visible)
 	interaction_hint.visible = not touch_controls.visible
+	character_creator.opened.connect(func() -> void: _set_character_creator(true))
+	character_creator.closed.connect(func() -> void: _set_character_creator(false))
+	character_creator.saved.connect(_save_character)
+	if not FileAccess.file_exists(CharacterChoice.SAVE_PATH):
+		character_creator.open(CharacterChoice.new(), true)
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("character_creator") and not _driving and not service_manual_view.visible and not service_terminal_view.visible and not character_creator.overlay.visible:
+		character_creator.open(CharacterChoice.read_saved(), false)
+		get_viewport().set_input_as_handled()
+
+
+func _save_character(choice: CharacterChoice) -> void:
+	player.visual.apply_choice(choice)
+	_set_character_creator(false)
+
+
+func _set_character_creator(active: bool) -> void:
+	player.controls_enabled = not active
+	interaction_hint.visible = not active and not touch_controls.visible
+	touch_controls.set_inspecting(active)
+	if not active and not DisplayServer.is_touchscreen_available():
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _update_interaction_target(value: String) -> void:
@@ -57,6 +82,7 @@ func _set_inspection(active: bool) -> void:
 	player.controls_enabled = not active
 	interaction_hint.visible = not active and not touch_controls.visible
 	touch_controls.set_inspecting(active)
+	character_creator.set_available(not active and not _driving)
 
 
 func _enter_car() -> void:
@@ -72,6 +98,7 @@ func _enter_car() -> void:
 	touch_controls.set_driving(true)
 	tide_hatchback.driving_camera.make_current()
 	vehicle_hud.set_driving(true)
+	character_creator.set_available(false)
 
 
 func _exit_car() -> void:
@@ -97,3 +124,4 @@ func _exit_car() -> void:
 	player.controls_enabled = true
 	interaction_hint.visible = not touch_controls.visible
 	player.camera.make_current()
+	character_creator.set_available(true)

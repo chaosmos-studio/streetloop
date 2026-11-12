@@ -1,0 +1,195 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_creator_view.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/character_appearance.gd" id="2_appearance"]
+
+[sub_resource type="Environment" id="Environment_preview"]
+background_mode = 1
+background_color = Color(0.14, 0.18, 0.21, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.72, 0.8, 0.88, 1)
+ambient_light_energy = 0.7
+
+[node name="CharacterCreatorView" type="CanvasLayer"]
+layer = 8
+script = ExtResource("1_script")
+
+[node name="OpenButton" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 164.0
+offset_bottom = 62.0
+text = "CHARACTER  C"
+
+[node name="Overlay" type="Control" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="Shade" type="ColorRect" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.025, 0.046, 0.055, 0.96)
+
+[node name="Grid" type="GridContainer" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 32.0
+offset_right = -36.0
+offset_bottom = -32.0
+theme_override_constants/h_separation = 28
+columns = 2
+
+[node name="PreviewPanel" type="PanelContainer" parent="Overlay/Grid"]
+custom_minimum_size = Vector2(340, 330)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Preview" type="Control" parent="Overlay/Grid/PreviewPanel"]
+mouse_filter = 1
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="Overlay/Grid/PreviewPanel/Preview"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+mouse_filter = 2
+
+[node name="Viewport" type="SubViewport" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer"]
+size = Vector2i(480, 600)
+own_world_3d = true
+transparent_bg = false
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Stage" type="Node3D" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer/Viewport"]
+
+[node name="Visual" type="Node3D" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer/Viewport/Stage"]
+script = ExtResource("2_appearance")
+
+[node name="Camera" type="Camera3D" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer/Viewport/Stage"]
+position = Vector3(0, 1.2, 3.1)
+rotation = Vector3(-0.08, 0, 0)
+current = true
+fov = 39.0
+
+[node name="KeyLight" type="DirectionalLight3D" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer/Viewport/Stage"]
+rotation = Vector3(-0.6, -0.5, -0.2)
+light_energy = 1.25
+
+[node name="FillLight" type="DirectionalLight3D" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer/Viewport/Stage"]
+rotation = Vector3(-0.25, 2.4, 0)
+light_energy = 0.3
+
+[node name="Atmosphere" type="WorldEnvironment" parent="Overlay/Grid/PreviewPanel/Preview/ViewportContainer/Viewport/Stage"]
+environment = SubResource("Environment_preview")
+
+[node name="PreviewLabel" type="Label" parent="Overlay/Grid/PreviewPanel/Preview"]
+anchor_right = 1.0
+offset_left = 18.0
+offset_top = 14.0
+offset_right = -18.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 24
+text = "YOUR CHARACTER"
+
+[node name="TurnLeft" type="Button" parent="Overlay/Grid/PreviewPanel/Preview"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -24.0
+offset_right = 74.0
+offset_bottom = 24.0
+text = "<"
+
+[node name="TurnRight" type="Button" parent="Overlay/Grid/PreviewPanel/Preview"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -24.0
+offset_right = -16.0
+offset_bottom = 24.0
+text = ">"
+
+[node name="ViewToggle" type="Button" parent="Overlay/Grid/PreviewPanel/Preview"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 14.0
+offset_right = -16.0
+offset_bottom = 54.0
+text = "FACE"
+
+[node name="ChoicesPanel" type="PanelContainer" parent="Overlay/Grid"]
+custom_minimum_size = Vector2(350, 330)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Layout" type="VBoxContainer" parent="Overlay/Grid/ChoicesPanel"]
+theme_override_constants/separation = 10
+
+[node name="Scroll" type="ScrollContainer" parent="Overlay/Grid/ChoicesPanel/Layout"]
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Form" type="VBoxContainer" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+theme_override_font_sizes/font_size = 30
+text = "Make your character"
+
+[node name="Description" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+custom_minimum_size = Vector2(0, 52)
+autowrap_mode = 3
+text = "Choose a face and body, then make them yours."
+
+[node name="IdentityLabel" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+text = "FACE + BODY"
+
+[node name="Identity" type="OptionButton" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="SkinLabel" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+text = "SKIN"
+
+[node name="Skin" type="OptionButton" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="HairLabel" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+text = "HAIR"
+
+[node name="Hair" type="OptionButton" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="ShirtLabel" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+text = "TOP"
+
+[node name="Shirt" type="OptionButton" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="TrousersLabel" type="Label" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+text = "TROUSERS"
+
+[node name="Trousers" type="OptionButton" parent="Overlay/Grid/ChoicesPanel/Layout/Scroll/Form"]
+custom_minimum_size = Vector2(0, 44)
+
+[node name="Actions" type="HBoxContainer" parent="Overlay/Grid/ChoicesPanel/Layout"]
+theme_override_constants/separation = 12
+
+[node name="Back" type="Button" parent="Overlay/Grid/ChoicesPanel/Layout/Actions"]
+custom_minimum_size = Vector2(110, 48)
+text = "BACK"
+
+[node name="Save" type="Button" parent="Overlay/Grid/ChoicesPanel/Layout/Actions"]
+custom_minimum_size = Vector2(170, 48)
+size_flags_horizontal = 3
+text = "SAVE + PLAY"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterIdentity" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/character_identity.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://assets/models/characters/dev.glb" id="2_model"]
+
+[resource]
+script = ExtResource("1_script")
+identity_id = "dev"
+display_name = "Dev"
+description = "Broad shoulders, an angular jaw, and a close crop."
+model = ExtResource("2_model")
