@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/service_manual_view.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/textures/A156_manual_paper.png" id="2_paper"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_page"]
+texture = ExtResource("2_paper")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.16, 0.34, 0.35, 1)
+border_width_bottom = 3
+border_color = Color(0.07, 0.2, 0.21, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+bg_color = Color(0.22, 0.43, 0.44, 1)
+border_width_bottom = 3
+border_color = Color(0.07, 0.2, 0.21, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+bg_color = Color(0.1, 0.25, 0.26, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_disabled"]
+bg_color = Color(0.43, 0.46, 0.43, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[node name="ServiceManualView" type="CanvasLayer"]
+layer = 12
+script = ExtResource("1_script")
+
+[node name="Shade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.025, 0.04, 0.043, 0.67)
+
+[node name="Margin" type="MarginContainer" parent="Shade"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="Center" type="CenterContainer" parent="Shade/Margin"]
+layout_mode = 2
+
+[node name="Page" type="PanelContainer" parent="Shade/Margin/Center"]
+custom_minimum_size = Vector2(700, 480)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_page")
+
+[node name="Padding" type="MarginContainer" parent="Shade/Margin/Center/Page"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Content" type="VBoxContainer" parent="Shade/Margin/Center/Page/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Series" type="Label" parent="Shade/Margin/Center/Page/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46, 0.31, 0.23, 1)
+theme_override_font_sizes/font_size = 16
+text = "HARBOR WORKSHOP  /  FIELD NOTES"
+
+[node name="Heading" type="Label" parent="Shade/Margin/Center/Page/Padding/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13, 0.28, 0.29, 1)
+theme_override_font_sizes/font_size = 36
+text = "Harbor workshop"
+
+[node name="Rule" type="ColorRect" parent="Shade/Margin/Center/Page/Padding/Content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.58, 0.39, 0.29, 1)
+
+[node name="Body" type="Label" parent="Shade/Margin/Center/Page/Padding/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.19, 0.2, 0.18, 1)
+theme_override_font_sizes/font_size = 24
+text = "Service notes"
+autowrap_mode = 3
+
+[node name="Navigation" type="HBoxContainer" parent="Shade/Margin/Center/Page/Padding/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Previous" type="Button" parent="Shade/Margin/Center/Page/Padding/Content/Navigation"]
+custom_minimum_size = Vector2(96, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_colors/font_disabled_color = Color(0.71, 0.71, 0.68, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_disabled")
+text = "Previous"
+
+[node name="Count" type="Label" parent="Shade/Margin/Center/Page/Padding/Content/Navigation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 18
+text = "01 / 04"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Next" type="Button" parent="Shade/Margin/Center/Page/Padding/Content/Navigation"]
+custom_minimum_size = Vector2(80, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_colors/font_disabled_color = Color(0.71, 0.71, 0.68, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_disabled")
+text = "Next"
+
+[node name="Close" type="Button" parent="Shade/Margin/Center/Page/Padding/Content/Navigation"]
+custom_minimum_size = Vector2(80, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+text = "Close"

@@ -25,7 +25,7 @@ The player must be able to enter, move around every furnishing, examine each aut
 - [ ] Give each furnishing a collision shape and a close inspection position that the camera can reach.
 - [x] Animate the fan blades with acceleration and coast-down tied to the wall switch.
 - [x] Make the switch state visible and the fan state persistent while the room remains loaded.
-- [ ] Let the service manual open, turn pages, and show original legible content.
+- [x] Let the service manual open, turn pages, and show original legible content.
 - [ ] Let the computer gain input focus, accept player input, and return control cleanly to movement.
 - [ ] Give drawers, cabinets, and loose items individual inspect or use states where their construction suggests one.
 
@@ -39,5 +39,5 @@ The player must be able to enter, move around every furnishing, examine each aut
 - [ ] Capture exterior, room-wide, close material, interaction, and moving-object evidence.
 
 One object is accepted only after its Blender source, glTF export, Godot scene, behavior, and review record agree.
-The current screenshots show a structural room, a first-pass bench, an operated fan and switch, and one ceramic entrance section.
+The current screenshots show a structural room, a first-pass bench, an operated fan and switch, one ceramic entrance section, and the service manual at desktop and landscape phone sizes.
 The floor finish still needs material and lighting refinement before this benchmark is complete.
