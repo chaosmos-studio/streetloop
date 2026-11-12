@@ -6,7 +6,8 @@ The entrance door, garage shutter, roof tank, awning, and windows are separate s
 The second-pass GLB contains 82 intended mesh nodes, 10 materials, and is 220 KiB.
 The solid placeholder shell was replaced with separate floor slabs, rear and side walls, front piers, lintels, and upper window openings.
 The front pedestrian opening is about 1.6 m wide and the service bay opening is about 5.05 m wide.
-The door and shutter remain separate meshes for later opening animation.
+The shutter remains a separate mesh for later opening animation.
+The old decorative pedestrian door was removed from the shop export so A122 can occupy the entrance as its own hinged asset.
 The exterior was inspected again in the live Blender viewport after the structural change.
 
 ## Pending review
