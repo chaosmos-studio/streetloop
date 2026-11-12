@@ -31,3 +31,7 @@ Its Blender source retains 17 separate objects and the GLB groups them into four
 Four modules cover the repair shop entrance, and the Godot capture is in `art/review/ceramic_floor_close.png`.
 The corrected export imported without errors and the entrance view measured 460 draw calls, while the exterior measured 833 draw calls and 48,666 primitives.
 The current grout is readable, but the tile glaze and surface variation are too subtle in the Compatibility renderer at player height.
+The first player controller entered the repair shop from the sidewalk during a 72-tick forward input run.
+The player moved from `(4.7, 0.17, 3.36)` to `(9.52, 0.16, 3.36)` and remained on the floor.
+The gameplay camera captured both the entrance and interior in `art/review/first_player_spawn.png` and `art/review/first_player_shop.png`.
+The character reads at the gameplay distance, but its shoulders, hands, and workwear need the material and form pass recorded in the A001 review.

@@ -9,6 +9,8 @@ func _capture() -> void:
 	var block: PackedScene = load("res://scenes/main.tscn")
 	var scene: Node3D = block.instantiate()
 	root.add_child(scene)
+	var camera: Camera3D = scene.get_node("ReviewCamera")
+	camera.current = true
 	await process_frame
 	await process_frame
 	await RenderingServer.frame_post_draw
@@ -18,7 +20,6 @@ func _capture() -> void:
 	print("Capture: ", output, " ", image.get_width(), "x", image.get_height(), " result=", result)
 	print("Exterior draw calls: ", Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
 	print("Exterior rendered primitives: ", Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME))
-	var camera: Camera3D = scene.get_node("ReviewCamera")
 	camera.position = Vector3(7.2, 1.7, 1.4)
 	camera.look_at(Vector3(11.4, 1.1, -1.8))
 	await process_frame

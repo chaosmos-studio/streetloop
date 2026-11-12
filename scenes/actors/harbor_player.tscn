@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A001_harbor_runner.glb" id="1_model"]
+[ext_resource type="Script" path="res://scripts/harbor_player.gd" id="2_controller"]
+[ext_resource type="Script" path="res://scripts/harbor_runner_visual.gd" id="3_visual"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.32
+height = 1.75
+
+[node name="HarborPlayer" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 0.18
+script = ExtResource("2_controller")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="Visual" type="Node3D" parent="."]
+rotation = Vector3(0, 1.5708, 0)
+script = ExtResource("3_visual")
+
+[node name="Model" parent="Visual" instance=ExtResource("1_model")]
+
+[node name="CameraYaw" type="Node3D" parent="."]
+position = Vector3(0, 1.45, 0)
+rotation = Vector3(0, -1.5708, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraYaw"]
+rotation = Vector3(-0.2, 0, 0)
+spring_length = 3.2
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraYaw/SpringArm3D"]
+current = true
+fov = 68.0
