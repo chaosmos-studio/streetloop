@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="PackedScene" path="res://assets/models/A006_corner_repair_shop.glb" id="1_shop"]
 [ext_resource type="PackedScene" path="res://scenes/world/mechanic_workbench.tscn" id="2_bench"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/repair_shop.gd" id="6_script"]
 [ext_resource type="PackedScene" path="res://assets/models/A149_glazed_ceramic_floor.glb" id="7_tiles"]
 [ext_resource type="PackedScene" path="res://scenes/world/service_manual.tscn" id="8_manual"]
+[ext_resource type="PackedScene" path="res://scenes/world/service_terminal.tscn" id="9_terminal"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(10.05, 0.22, 8.05)
@@ -107,6 +108,9 @@ position = Vector3(1.8, 0.16, 2.6)
 [node name="ServiceManual" parent="." instance=ExtResource("8_manual")]
 position = Vector3(2.24, 1.076, 2.6)
 rotation = Vector3(0, 2.94, 0)
+
+[node name="ServiceTerminal" parent="." instance=ExtResource("9_terminal")]
+position = Vector3(1.13, 1.076, 2.75)
 
 [node name="PublicDoor" parent="." instance=ExtResource("3_door")]
 position = Vector3(-3.36, 0, -4.02)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A157_harbor_service_terminal.glb" id="1_art"]
+[ext_resource type="Script" path="res://scripts/service_terminal.gd" id="2_script"]
+[ext_resource type="Script" path="res://scripts/world_interactable.gd" id="3_interaction"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(0.77, 0.63, 0.68)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interaction"]
+size = Vector3(0.95, 0.75, 0.86)
+
+[node name="ServiceTerminal" type="StaticBody3D"]
+script = ExtResource("2_script")
+
+[node name="Art" parent="." instance=ExtResource("1_art")]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.315, -0.18)
+shape = SubResource("BoxShape3D_body")
+
+[node name="Interaction" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_interaction")
+prompt_text = "Use service terminal"
+
+[node name="InteractionVolume" type="CollisionShape3D" parent="Interaction"]
+position = Vector3(0, 0.3, -0.27)
+shape = SubResource("BoxShape3D_interaction")

@@ -4,6 +4,10 @@ extends Node3D
 @onready var interaction_hint: InteractionHint = $InteractionHint
 @onready var service_manual: ServiceManual = $HarborBlock/Buildings/CornerRepairShop/ServiceManual
 @onready var service_manual_view: ServiceManualView = $ServiceManualView
+@onready var service_terminal: ServiceTerminal = $HarborBlock/Buildings/CornerRepairShop/ServiceTerminal
+@onready var service_terminal_view: ServiceTerminalView = $ServiceTerminalView
+@onready var fan_switch: FanSwitch = $HarborBlock/Buildings/CornerRepairShop/FanSwitch
+@onready var ceiling_fan: WorkshopFan = $HarborBlock/Buildings/CornerRepairShop/CeilingFan
 @onready var tide_hatchback: TideHatchback = $TideHatchback
 @onready var vehicle_hud: VehicleHud = $VehicleHud
 
@@ -14,24 +18,39 @@ func _ready() -> void:
 	player.focused_interactable_changed.connect(interaction_hint.set_target_text)
 	service_manual.opened.connect(_open_service_manual)
 	service_manual_view.closed.connect(_close_service_manual)
+	service_terminal.opened.connect(_open_service_terminal)
+	service_terminal_view.closed.connect(_close_service_terminal)
+	service_terminal_view.bind(fan_switch, ceiling_fan)
 	tide_hatchback.enter_requested.connect(func() -> void: call_deferred("_enter_car"))
 	tide_hatchback.exit_requested.connect(func() -> void: call_deferred("_exit_car"))
 	vehicle_hud.bind(tide_hatchback)
 
 
 func _open_service_manual() -> void:
-	player.controls_enabled = false
-	interaction_hint.visible = false
+	_set_inspection(true)
 	service_manual_view.open()
 
 
 func _close_service_manual() -> void:
-	player.controls_enabled = true
-	interaction_hint.visible = true
+	_set_inspection(false)
+
+
+func _open_service_terminal() -> void:
+	_set_inspection(true)
+	service_terminal_view.open()
+
+
+func _close_service_terminal() -> void:
+	_set_inspection(false)
+
+
+func _set_inspection(active: bool) -> void:
+	player.controls_enabled = not active
+	interaction_hint.visible = not active
 
 
 func _enter_car() -> void:
-	if _driving or service_manual_view.visible:
+	if _driving or service_manual_view.visible or service_terminal_view.visible:
 		return
 	_driving = true
 	player.controls_enabled = false
