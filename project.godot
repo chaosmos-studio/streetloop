@@ -63,6 +63,10 @@ interact={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"physical_keycode":69), Object(InputEventJoypadButton,"button_index":2)]
 }
+brake={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":32), Object(InputEventJoypadButton,"button_index":0)]
+}
 
 [rendering]
 

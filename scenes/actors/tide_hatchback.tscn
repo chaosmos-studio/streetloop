@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/A002_harbor_compact_car.glb" id="1_body"]
+[ext_resource type="PackedScene" path="res://assets/models/A141_hatchback_wheel_and_tire.glb" id="2_wheel"]
+[ext_resource type="Script" path="res://scripts/tide_hatchback.gd" id="3_script"]
+[ext_resource type="Script" path="res://scripts/world_interactable.gd" id="4_interaction"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_body"]
+size = Vector3(1.64, 0.74, 3.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_door"]
+size = Vector3(0.8, 1.15, 1.25)
+
+[node name="TideHatchback" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 11
+mass = 1220.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.18, 0)
+linear_damp = 0.04
+angular_damp = 0.12
+can_sleep = false
+script = ExtResource("3_script")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_body")
+
+[node name="BodyArt" parent="." instance=ExtResource("1_body")]
+position = Vector3(0, -0.85, 0)
+
+[node name="Wheels" type="Node3D" parent="."]
+
+[node name="Wheel0" type="Node3D" parent="Wheels"]
+position = Vector3(-0.85, 0, -1.2)
+
+[node name="Steer" type="Node3D" parent="Wheels/Wheel0"]
+
+[node name="Mount" type="Node3D" parent="Wheels/Wheel0/Steer"]
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Spin" type="Node3D" parent="Wheels/Wheel0/Steer/Mount"]
+
+[node name="Art" parent="Wheels/Wheel0/Steer/Mount/Spin" instance=ExtResource("2_wheel")]
+
+[node name="Wheel1" type="Node3D" parent="Wheels"]
+position = Vector3(0.85, 0, -1.2)
+
+[node name="Steer" type="Node3D" parent="Wheels/Wheel1"]
+
+[node name="Mount" type="Node3D" parent="Wheels/Wheel1/Steer"]
+
+[node name="Spin" type="Node3D" parent="Wheels/Wheel1/Steer/Mount"]
+
+[node name="Art" parent="Wheels/Wheel1/Steer/Mount/Spin" instance=ExtResource("2_wheel")]
+
+[node name="Wheel2" type="Node3D" parent="Wheels"]
+position = Vector3(-0.85, 0, 1.26)
+
+[node name="Steer" type="Node3D" parent="Wheels/Wheel2"]
+
+[node name="Mount" type="Node3D" parent="Wheels/Wheel2/Steer"]
+rotation = Vector3(0, 3.14159, 0)
+
+[node name="Spin" type="Node3D" parent="Wheels/Wheel2/Steer/Mount"]
+
+[node name="Art" parent="Wheels/Wheel2/Steer/Mount/Spin" instance=ExtResource("2_wheel")]
+
+[node name="Wheel3" type="Node3D" parent="Wheels"]
+position = Vector3(0.85, 0, 1.26)
+
+[node name="Steer" type="Node3D" parent="Wheels/Wheel3"]
+
+[node name="Mount" type="Node3D" parent="Wheels/Wheel3/Steer"]
+
+[node name="Spin" type="Node3D" parent="Wheels/Wheel3/Steer/Mount"]
+
+[node name="Art" parent="Wheels/Wheel3/Steer/Mount/Spin" instance=ExtResource("2_wheel")]
+
+[node name="DriverDoorInteraction" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_interaction")
+prompt_text = "Drive"
+
+[node name="InteractionVolume" type="CollisionShape3D" parent="DriverDoorInteraction"]
+position = Vector3(-1.13, 0.15, -0.35)
+shape = SubResource("BoxShape3D_door")
+
+[node name="CameraRig" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig"]
+rotation = Vector3(-0.16, 0, 0)
+spring_length = 4.8
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/SpringArm3D"]
+current = false
+fov = 68.0

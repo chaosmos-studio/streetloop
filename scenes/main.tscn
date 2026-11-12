@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/road_segment.tscn" id="1_road"]
 [ext_resource type="PackedScene" path="res://scenes/world/sidewalk_segment.tscn" id="2_sidewalk"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hint.tscn" id="5_hint"]
 [ext_resource type="Script" path="res://scripts/streetloop_game.gd" id="6_game"]
 [ext_resource type="PackedScene" path="res://scenes/ui/service_manual_view.tscn" id="7_manual_view"]
+[ext_resource type="PackedScene" path="res://scenes/actors/tide_hatchback.tscn" id="8_car"]
+[ext_resource type="PackedScene" path="res://scenes/ui/vehicle_hud.tscn" id="9_vehicle_hud"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
 albedo_color = Color(0.43, 0.48, 0.43, 1)
@@ -83,9 +85,15 @@ environment = SubResource("Environment_day")
 [node name="Player" parent="." instance=ExtResource("4_player")]
 position = Vector3(4.7, 0.17, 3.36)
 
+[node name="TideHatchback" parent="." instance=ExtResource("8_car")]
+position = Vector3(2.25, 0.85, 8)
+rotation = Vector3(0, 3.14159, 0)
+
 [node name="InteractionHint" parent="." instance=ExtResource("5_hint")]
 
 [node name="ServiceManualView" parent="." instance=ExtResource("7_manual_view")]
+
+[node name="VehicleHud" parent="." instance=ExtResource("9_vehicle_hud")]
 
 [node name="ReviewCamera" type="Camera3D" parent="."]
 position = Vector3(-10, 8, 14)
