@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/world/road_segment.tscn" id="1_road"]
 [ext_resource type="PackedScene" path="res://scenes/world/sidewalk_segment.tscn" id="2_sidewalk"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/vehicle_hud.tscn" id="9_vehicle_hud"]
 [ext_resource type="PackedScene" path="res://scenes/world/harbor_streetlamp.tscn" id="10_lamp"]
 [ext_resource type="PackedScene" path="res://scenes/ui/service_terminal_view.tscn" id="11_terminal_view"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="12_touch_controls"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ground"]
 albedo_color = Color(0.43, 0.48, 0.43, 1)
@@ -112,6 +113,8 @@ rotation = Vector3(0, 3.14159, 0)
 [node name="ServiceTerminalView" parent="." instance=ExtResource("11_terminal_view")]
 
 [node name="VehicleHud" parent="." instance=ExtResource("9_vehicle_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("12_touch_controls")]
 
 [node name="ReviewCamera" type="Camera3D" parent="."]
 position = Vector3(-10, 8, 14)

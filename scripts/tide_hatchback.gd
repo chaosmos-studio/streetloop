@@ -28,6 +28,7 @@ var controls_enabled: bool = false
 var _throttle: float = 0.0
 var _steering: float = 0.0
 var _braking: bool = false
+var _look_yaw: float = 0.0
 var _wheel_steers: Array[Node3D] = []
 var _wheel_spins: Array[Node3D] = []
 var _wheel_lengths: Array[float] = [0.3, 0.3, 0.3, 0.3]
@@ -76,7 +77,7 @@ func _process(delta: float) -> void:
 		_wheel_spins[index].rotation.x += forward_speed / wheel_radius * wheel_side * delta
 	var desired_position: Vector3 = global_position + Vector3.UP * 1.1
 	camera_rig.global_position = camera_rig.global_position.lerp(desired_position, minf(1.0, delta * 10.0))
-	camera_rig.global_rotation.y = lerp_angle(camera_rig.global_rotation.y, global_rotation.y, minf(1.0, delta * 7.0))
+	camera_rig.global_rotation.y = lerp_angle(camera_rig.global_rotation.y, global_rotation.y + _look_yaw, minf(1.0, delta * 7.0))
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -116,3 +117,12 @@ func driver_exit_position() -> Vector3:
 
 func speed_kmh() -> float:
 	return linear_velocity.length() * 3.6
+
+
+func request_exit() -> void:
+	exit_requested.emit()
+
+
+func add_look_delta(relative: Vector2) -> void:
+	_look_yaw = clampf(_look_yaw - relative.x * 0.0024, -1.2, 1.2)
+	$CameraRig/SpringArm3D.rotation.x = clampf($CameraRig/SpringArm3D.rotation.x - relative.y * 0.0024, -0.5, 0.25)

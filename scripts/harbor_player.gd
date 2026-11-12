@@ -28,15 +28,15 @@ var _focused_text: String = ""
 
 func _ready() -> void:
 	spring_arm.add_excluded_object(get_rid())
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if not DisplayServer.is_touchscreen_available():
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _input(event: InputEvent) -> void:
 	if not controls_enabled:
 		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		camera_yaw.rotation.y -= event.relative.x * mouse_sensitivity
-		spring_arm.rotation.x = clampf(spring_arm.rotation.x - event.relative.y * mouse_sensitivity, -0.62, 0.3)
+		add_look_delta(event.relative)
 	if event is InputEventMouseButton and event.pressed and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
@@ -94,6 +94,15 @@ func _physics_process(delta: float) -> void:
 
 func request_interaction() -> void:
 	_interact_requested = true
+
+
+func request_jump() -> void:
+	_jump_buffer = 0.12
+
+
+func add_look_delta(relative: Vector2) -> void:
+	camera_yaw.rotation.y -= relative.x * mouse_sensitivity
+	spring_arm.rotation.x = clampf(spring_arm.rotation.x - relative.y * mouse_sensitivity, -0.62, 0.3)
 
 
 func _update_look_target() -> void:

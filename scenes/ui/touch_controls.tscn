@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/touch_controls.gd" id="1_script"]
+
+[node name="TouchControls" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_script")
+
+[node name="Overlay" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MoveStick" type="VirtualJoystick" parent="Overlay"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -198.0
+offset_right = 198.0
+offset_bottom = -18.0
+grow_vertical = 0
+
+[node name="Sprint" type="Button" parent="Overlay"]
+focus_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -94.0
+offset_right = -112.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "RUN"
+
+[node name="Action" type="Button" parent="Overlay"]
+focus_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -184.0
+offset_right = -18.0
+offset_bottom = -102.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "USE"
+
+[node name="Primary" type="Button" parent="Overlay"]
+focus_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -96.0
+offset_right = -18.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "JUMP"

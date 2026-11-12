@@ -10,12 +10,13 @@ extends Node3D
 @onready var ceiling_fan: WorkshopFan = $HarborBlock/Buildings/CornerRepairShop/CeilingFan
 @onready var tide_hatchback: TideHatchback = $TideHatchback
 @onready var vehicle_hud: VehicleHud = $VehicleHud
+@onready var touch_controls: TouchControls = $TouchControls
 
 var _driving: bool = false
 
 
 func _ready() -> void:
-	player.focused_interactable_changed.connect(interaction_hint.set_target_text)
+	player.focused_interactable_changed.connect(_update_interaction_target)
 	service_manual.opened.connect(_open_service_manual)
 	service_manual_view.closed.connect(_close_service_manual)
 	service_terminal.opened.connect(_open_service_terminal)
@@ -24,6 +25,14 @@ func _ready() -> void:
 	tide_hatchback.enter_requested.connect(func() -> void: call_deferred("_enter_car"))
 	tide_hatchback.exit_requested.connect(func() -> void: call_deferred("_exit_car"))
 	vehicle_hud.bind(tide_hatchback)
+	touch_controls.bind(player, tide_hatchback)
+	vehicle_hud.set_touch_mode(touch_controls.visible)
+	interaction_hint.visible = not touch_controls.visible
+
+
+func _update_interaction_target(value: String) -> void:
+	interaction_hint.set_target_text(value)
+	touch_controls.set_action_prompt(value)
 
 
 func _open_service_manual() -> void:
@@ -46,7 +55,8 @@ func _close_service_terminal() -> void:
 
 func _set_inspection(active: bool) -> void:
 	player.controls_enabled = not active
-	interaction_hint.visible = not active
+	interaction_hint.visible = not active and not touch_controls.visible
+	touch_controls.set_inspecting(active)
 
 
 func _enter_car() -> void:
@@ -59,6 +69,7 @@ func _enter_car() -> void:
 	player.visible = false
 	interaction_hint.visible = false
 	tide_hatchback.controls_enabled = true
+	touch_controls.set_driving(true)
 	tide_hatchback.driving_camera.make_current()
 	vehicle_hud.set_driving(true)
 
@@ -76,6 +87,7 @@ func _exit_car() -> void:
 		return
 	_driving = false
 	tide_hatchback.controls_enabled = false
+	touch_controls.set_driving(false)
 	vehicle_hud.set_driving(false)
 	player.global_position = exit_position
 	player.velocity = Vector3.ZERO
@@ -83,5 +95,5 @@ func _exit_car() -> void:
 	player.set_physics_process(true)
 	player.visible = true
 	player.controls_enabled = true
-	interaction_hint.visible = true
+	interaction_hint.visible = not touch_controls.visible
 	player.camera.make_current()
