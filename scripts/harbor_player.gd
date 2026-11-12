@@ -3,10 +3,10 @@ extends CharacterBody3D
 
 signal focused_interactable_changed(text: String)
 
-@export var walk_speed: float = 4.2
-@export var sprint_speed: float = 6.2
-@export var acceleration: float = 16.0
-@export var braking: float = 21.0
+@export var walk_speed: float = 1.7
+@export var sprint_speed: float = 3.8
+@export var acceleration: float = 10.0
+@export var braking: float = 14.0
 @export var jump_velocity: float = 5.1
 @export var turn_speed: float = 12.0
 @export var mouse_sensitivity: float = 0.0024
@@ -89,7 +89,7 @@ func _physics_process(delta: float) -> void:
 			_focused_interactable.activate()
 	if direction.length_squared() > 0.001:
 		visual.rotation.y = lerp_angle(visual.rotation.y, atan2(direction.x, direction.z), minf(1.0, turn_speed * delta))
-	visual.set_motion(horizontal.length(), is_on_floor())
+	visual.set_motion(horizontal.length(), is_on_floor(), velocity.y)
 
 
 func request_interaction() -> void:
