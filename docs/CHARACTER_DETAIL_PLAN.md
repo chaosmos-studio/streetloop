@@ -32,6 +32,29 @@ The next unit is the character's original face and skin surface, followed by the
 
 ## Creator work units
 
+### Configurable parts
+
+| Part | Current creator | Acceptance before expanding it |
+| --- | --- | --- |
+| Face and body identity | Three complete adult bases | Review each face and silhouette in motion from front, profile, rear, and gameplay distance. |
+| Skin | Five color choices | Paint undertones and roughness by body region, then check every tone in daylight, shade, and interior light. |
+| Hair | Four colors on the chosen base groom | Fit independent scalp styles, brows, lashes, and facial hair to every head before exposing style switches. |
+| Top and trousers | Separate color choices on one fitted outfit | Author interchangeable garment shapes, sizes, closures, fabric maps, and deformation for every body. |
+| Eyes, glasses, jewellery, and bags | Fixed with the identity or absent | Add the separate geometry, attachment points, close views, and collision checks before exposing options. |
+| Height, limb lengths, and body proportions | Fixed within each identity | Refit collision, camera, car seat, reach, and every motion clip before adding sliders. |
+
+Expressions, finger joints, skin detail, fabric construction, and shoe contact are quality requirements for every identity rather than creator sliders.
+Every visible choice must survive a save and show the same result in the preview, street, shop, and car scenes.
+
+### Acceptance order
+
+1. Finish one original face with reviewed skin, eyes, eyelids, mouth, brows, and expressions.
+2. Build a fitted hairline and one groom for that face, then inspect it close and at gameplay scale.
+3. Construct one complete outfit and footwear set with authored seams and measured material maps.
+4. Correct the shared rig and gait using planted-foot and deformation review.
+5. Repeat the same acceptance for the other identities before offering independent hair, facial hair, garment, or proportion choices.
+6. Add close, gameplay, and distant LODs and profile frame time on the target laptop.
+
 - [ ] Review multiple original adult face and body bases at front, profile, rear, and gameplay distances.
 - [ ] Review skin tones under daylight, shade, and interior light without losing facial structure.
 - [ ] Fit at least two hair silhouettes and one facial-hair option to each head shape.
