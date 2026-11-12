@@ -6,6 +6,7 @@ extends Node3D
 
 @onready var art_pivot: Node3D = $Art/DoorLeafPivot
 @onready var leaf_body: AnimatableBody3D = $LeafBody
+@onready var interaction: WorldInteractable = $Interaction
 
 var _target_angle: float = 0.0
 var _angle: float = 0.0
@@ -15,6 +16,7 @@ func _ready() -> void:
 	_target_angle = open_angle if initially_open else 0.0
 	_angle = _target_angle
 	_set_leaf_angle(_angle)
+	interaction.prompt_text = "Close door" if initially_open else "Open door"
 	$Interaction.activated.connect(_toggle)
 
 
@@ -25,6 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func set_open(value: bool) -> void:
 	_target_angle = open_angle if value else 0.0
+	interaction.prompt_text = "Close door" if value else "Open door"
 
 
 func is_open() -> bool:

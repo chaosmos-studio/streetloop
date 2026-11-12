@@ -1,6 +1,8 @@
 class_name HarborPlayer
 extends CharacterBody3D
 
+signal focused_interactable_changed(text: String)
+
 @export var walk_speed: float = 4.2
 @export var sprint_speed: float = 6.2
 @export var acceleration: float = 16.0
@@ -20,6 +22,8 @@ var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var _jump_buffer: float = 0.0
 var _coyote_time: float = 0.0
 var _interact_requested: bool = false
+var _focused_interactable: WorldInteractable
+var _focused_text: String = ""
 
 
 func _ready() -> void:
@@ -78,9 +82,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = -0.05
 	move_and_slide()
+	_update_look_target()
 	if _interact_requested:
 		_interact_requested = false
-		_activate_look_target()
+		if _focused_interactable:
+			_focused_interactable.activate()
 	if direction.length_squared() > 0.001:
 		visual.rotation.y = lerp_angle(visual.rotation.y, atan2(direction.x, direction.z), minf(1.0, turn_speed * delta))
 	visual.set_motion(horizontal.length(), is_on_floor())
@@ -90,15 +96,19 @@ func request_interaction() -> void:
 	_interact_requested = true
 
 
-func _activate_look_target() -> void:
+func _update_look_target() -> void:
 	var origin: Vector3 = global_position + Vector3.UP * 1.4
 	var target: Vector3 = origin - camera.global_transform.basis.z * 2.3
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, target, 4)
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
 	var hit: Dictionary = get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty():
+	var interactable: WorldInteractable = null
+	if not hit.is_empty():
+		interactable = hit["collider"] as WorldInteractable
+	var prompt: String = interactable.prompt_text if interactable else ""
+	if interactable == _focused_interactable and prompt == _focused_text:
 		return
-	var interactable: WorldInteractable = hit["collider"] as WorldInteractable
-	if interactable:
-		interactable.activate()
+	_focused_interactable = interactable
+	_focused_text = prompt
+	focused_interactable_changed.emit(prompt)

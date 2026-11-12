@@ -38,3 +38,5 @@ The character reads at the gameplay distance, but its shoulders, hands, and work
 The on-foot interaction ray closes and reopens the public door from the entry path.
 The same input turns on the shop fan switch, and the fan reached 3.27 rad/s after 60 physics ticks in the focused interaction run.
 The switch light and rocker show its state while the room stays loaded.
+The gameplay capture shows a bottom-centered action hint only while the player faces the door interaction area.
+Its text changes between opening and closing, and the switch text changes with fan state.

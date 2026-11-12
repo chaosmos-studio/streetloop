@@ -8,6 +8,7 @@ signal toggled(enabled: bool)
 @onready var rocker: Node3D = $Art/SwitchRockerPivot
 @onready var indicator: MeshInstance3D = $Art/PowerIndicator
 @onready var indicator_light: OmniLight3D = $IndicatorLight
+@onready var interaction: WorldInteractable = $Interaction
 
 var _on: bool = false
 
@@ -32,3 +33,4 @@ func _update_appearance() -> void:
 	rocker.rotation.x = -0.12 if _on else 0.12
 	indicator.visible = _on
 	indicator_light.visible = _on
+	interaction.prompt_text = "Turn fan off" if _on else "Turn fan on"

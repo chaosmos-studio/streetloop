@@ -53,6 +53,7 @@ shape = SubResource("BoxShape3D_leaf")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("3_interaction")
+prompt_text = "Move door"
 
 [node name="InteractionVolume" type="CollisionShape3D" parent="Interaction"]
 position = Vector3(0, 1.2, 0)

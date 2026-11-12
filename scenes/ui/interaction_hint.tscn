@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/interaction_hint.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
+bg_color = Color(0.098, 0.145, 0.149, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.59, 0.56, 0.42, 0.8)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+
+[node name="InteractionHint" type="CanvasLayer"]
+script = ExtResource("1_script")
+
+[node name="Anchor" type="CenterContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_bottom = -24.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Anchor"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
+mouse_filter = 2
+
+[node name="Content" type="HBoxContainer" parent="Anchor/Panel"]
+theme_override_constants/separation = 12
+mouse_filter = 2
+
+[node name="Key" type="Label" parent="Anchor/Panel/Content"]
+theme_override_colors/font_color = Color(0.95, 0.72, 0.37, 1)
+theme_override_font_sizes/font_size = 24
+text = "E"
+
+[node name="Prompt" type="Label" parent="Anchor/Panel/Content"]
+theme_override_colors/font_color = Color(0.9, 0.89, 0.82, 1)
+theme_override_font_sizes/font_size = 20
+text = "Use"
