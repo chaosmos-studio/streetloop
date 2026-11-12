@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="PackedScene" path="res://assets/models/A006_corner_repair_shop.glb" id="1_shop"]
 [ext_resource type="PackedScene" path="res://scenes/world/mechanic_workbench.tscn" id="2_bench"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/world/ceiling_fan.tscn" id="4_fan"]
 [ext_resource type="PackedScene" path="res://scenes/world/fan_switch.tscn" id="5_switch"]
 [ext_resource type="Script" path="res://scripts/repair_shop.gd" id="6_script"]
+[ext_resource type="PackedScene" path="res://assets/models/A149_glazed_ceramic_floor.glb" id="7_tiles"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(10.05, 0.22, 8.05)
@@ -105,6 +106,18 @@ position = Vector3(1.8, 0.16, 2.6)
 [node name="PublicDoor" parent="." instance=ExtResource("3_door")]
 position = Vector3(-3.36, 0, -4.02)
 initially_open = true
+
+[node name="EntranceTilesNorthWest" parent="." instance=ExtResource("7_tiles")]
+position = Vector3(-3, 0.164, -3)
+
+[node name="EntranceTilesNorthEast" parent="." instance=ExtResource("7_tiles")]
+position = Vector3(-1, 0.164, -3)
+
+[node name="EntranceTilesSouthWest" parent="." instance=ExtResource("7_tiles")]
+position = Vector3(-3, 0.164, -1)
+
+[node name="EntranceTilesSouthEast" parent="." instance=ExtResource("7_tiles")]
+position = Vector3(-1, 0.164, -1)
 
 [node name="CeilingFan" parent="." instance=ExtResource("4_fan")]
 position = Vector3(0, 3.56, 0)

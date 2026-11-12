@@ -36,6 +36,14 @@ func _capture() -> void:
 	var bench_output: String = "res://art/review/workbench_material_close.png"
 	var bench_result: Error = bench_image.save_png(bench_output)
 	print("Capture: ", bench_output, " ", bench_image.get_width(), "x", bench_image.get_height(), " result=", bench_result)
+	camera.position = Vector3(9.25, 1.75, 2.0)
+	camera.look_at(Vector3(7.25, 0.16, 2.0))
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var tile_image: Image = root.get_texture().get_image()
+	var tile_output: String = "res://art/review/ceramic_floor_close.png"
+	var tile_result: Error = tile_image.save_png(tile_output)
+	print("Capture: ", tile_output, " ", tile_image.get_width(), "x", tile_image.get_height(), " result=", tile_result)
 	var shop: Node3D = scene.get_node("HarborBlock/Buildings/CornerRepairShop")
 	var fan: WorkshopFan = shop.get_node("CeilingFan")
 	var fan_switch: FanSwitch = shop.get_node("FanSwitch")
@@ -85,6 +93,8 @@ func _capture() -> void:
 		result = interior_result
 	if result == OK:
 		result = bench_result
+	if result == OK:
+		result = tile_result
 	if result == OK:
 		result = fan_result
 	if result == OK:

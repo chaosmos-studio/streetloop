@@ -26,3 +26,8 @@ The separate ceiling fan and wall switch were imported into the repair shop and 
 The review capture measured fan speed at 0 before the switch, 6.52 rad/s after 120 rendered frames switched on, and 5.40 rad/s after 60 rendered frames switched off.
 The captures in `art/review/workshop_fan_on.png` and `art/review/fan_switch_on.png` show the imported assets, but the room finishes remain flat and the switch has no player input path yet.
 The latest exterior review frame measured 781 draw calls and 37,278 primitives, and the interior measured 452 draw calls with the fan and switch present.
+The A149 ceramic module has 16 bevelled tiles and recessed grout across a 2 m square.
+Its Blender source retains 17 separate objects and the GLB groups them into four material meshes.
+Four modules cover the repair shop entrance, and the Godot capture is in `art/review/ceramic_floor_close.png`.
+The corrected export imported without errors and the entrance view measured 460 draw calls, while the exterior measured 833 draw calls and 48,666 primitives.
+The current grout is readable, but the tile glaze and surface variation are too subtle in the Compatibility renderer at player height.

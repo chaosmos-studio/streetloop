@@ -39,4 +39,5 @@ The player must be able to enter, move around every furnishing, examine each aut
 - [ ] Capture exterior, room-wide, close material, interaction, and moving-object evidence.
 
 One object is accepted only after its Blender source, glTF export, Godot scene, behavior, and review record agree.
-The current screenshots show a structural room and one first-pass bench, so none of these checks is marked complete yet.
+The current screenshots show a structural room, a first-pass bench, an operated fan and switch, and one ceramic entrance section.
+The floor finish still needs material and lighting refinement before this benchmark is complete.
