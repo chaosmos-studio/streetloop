@@ -11,6 +11,10 @@ func _verify() -> void:
 	root.add_child(scene)
 	var touch: TouchControls = scene.get_node("TouchControls")
 	var player: HarborPlayer = scene.get_node("Player")
+	var creator: CharacterCreatorView = scene.get_node("CharacterCreatorView")
+	if creator.overlay.visible:
+		creator._first_visit = false
+		creator.close()
 	touch.show_preview()
 	for frame: int in range(8):
 		await physics_frame
