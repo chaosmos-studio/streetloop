@@ -1,0 +1,6 @@
+.godot/
+*.import
+*.blend1
+*.blend2
+build/
+test-results/

@@ -6,7 +6,7 @@ Each milestone ends with a playable build and a short review of movement, visual
 ## M0: A convincing block
 
 - [x] Record the initial scope, scale, engine, and world assumptions.
-- [ ] Create the public repository and establish the Godot 4.7 project.
+- [x] Create the public repository and establish the Godot 4.7 project.
   Skills: `godot-prompter:godot-project-setup`, `godot-prompter:rendering-pipeline`.
 - [ ] Make an editable material and measurement reference in Blender.
   Skills: `godot-prompter:assets-pipeline`, `godot-prompter:3d-essentials`.
