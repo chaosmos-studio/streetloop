@@ -20,3 +20,12 @@ The character creator opens on a new profile. Open it again with C or the Charac
 
 The first block and its assets are under active construction.
 The [first-drive review](docs/reviews/2026-11-12-first-drive.md) and [service-terminal review](docs/reviews/2026-11-12-service-terminal.md) record measured behavior and visual gaps.
+
+## Deploying the browser preview
+
+The preview is the Cloudflare Worker `streetloop-play` on `chaosmos.studio/streetloop/`.
+A Worker serves at most 25 MiB a file, so `tools/prepare_web.py` splits the engine into parts and adds a loader that joins them.
+
+1. Export the Web preset to `build/web`.
+2. Run `python3 tools/prepare_web.py`.
+3. From this folder, with `CLOUDFLARE_API_TOKEN` set, run `deploy.sh streetloop-play streetloop=build/web`. The script is `actions/deploy-web/deploy.sh` in [chaosmos-studio/.github](https://github.com/chaosmos-studio/.github).
