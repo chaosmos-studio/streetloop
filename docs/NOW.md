@@ -2,7 +2,7 @@
 
 LIFE is the long-term game vision and Streetloop is its playable harbor foundation.
 The active area is H00 in `docs/areas/H00_harbor_block.md`.
-The public preview is https://chaosmos.studio/streetloop/.
+The public preview is https://chaosmos.studio/games/streetloop/.
 
 ## Next focused slice
 
