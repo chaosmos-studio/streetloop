@@ -10,7 +10,7 @@ Read [PLAN.md](PLAN.md), [ART_DIRECTION.md](ART_DIRECTION.md), and [ASSET_CATALO
 
 ## Current playable block
 
-Play the [browser preview](https://chaosmos.studio/streetloop/) on desktop or a landscape phone.
+Play the [browser preview](https://chaosmos.studio/games/streetloop/) on desktop or a landscape phone.
 On a phone, use the left stick to move or steer, drag the open upper screen to look, and use the right buttons to run, jump, interact, brake, or exit.
 
 Walk from the harbor sidewalk into the repair shop, use the door and fan switch, read the service manual, and run the fan diagnostic on the workbench terminal.
@@ -23,9 +23,10 @@ The [first-drive review](docs/reviews/2026-11-12-first-drive.md) and [service-te
 
 ## Deploying the browser preview
 
-The preview is the Cloudflare Worker `streetloop-play` on `chaosmos.studio/streetloop/`.
+The preview is the Cloudflare Worker `streetloop-play` on `chaosmos.studio/games/streetloop/`.
+The old address, `chaosmos.studio/streetloop/`, redirects there with its path and query.
 A Worker serves at most 25 MiB a file, so `tools/prepare_web.py` splits the engine into parts and adds a loader that joins them.
 
 1. Export the Web preset to `build/web`.
 2. Run `python3 tools/prepare_web.py`.
-3. From this folder, with `CLOUDFLARE_API_TOKEN` set, run `deploy.sh streetloop-play streetloop=build/web`. The script is `actions/deploy-web/deploy.sh` in [chaosmos-studio/.github](https://github.com/chaosmos-studio/.github).
+3. From this folder, with `CLOUDFLARE_API_TOKEN` set, run `deploy.sh streetloop-play games/streetloop=build/web`. The script is `actions/deploy-web/deploy.sh` in [chaosmos-studio/.github](https://github.com/chaosmos-studio/.github).
